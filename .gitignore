@@ -34,3 +34,4 @@ build/
 # Other specific files or directories
 *.log
 *.tmp
+.metadata/
