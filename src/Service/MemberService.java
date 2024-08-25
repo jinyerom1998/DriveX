@@ -32,11 +32,11 @@ public interface MemberService
 	/**
 	 * 충전하기 
 	 */
-	void balancePlusUpdate(String sessionId,int Amount);
+	void balancePlusUpdate(String memberId,int amount);
 	
 	
 	/**
 	 * 인출하기 or 차량구매 시 잔액
 	 */
-	void balanceMinusUpdate(String sessionId,int Amount);
+	void balanceMinusUpdate(String memberId,int amount);
 }

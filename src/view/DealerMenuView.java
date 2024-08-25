@@ -2,6 +2,8 @@ package view;
 
 import java.util.Scanner;
 
+import controller.DealerController;
+
 public class DealerMenuView {
 	static Scanner sc = new Scanner(System.in);
 	
@@ -48,5 +50,6 @@ public class DealerMenuView {
 		System.out.println("어떤 내용으로 자기소개를 고치겠습니까?");
 		String self = sc.nextLine();
 		//컨트롤러가 답글수정하는 함수 호출(인수: self)
+		DealerController.dealerUpdate(self);
 	}
 }

@@ -17,10 +17,10 @@ public class BalanceView {
 			int menu = Integer.parseInt(sc.nextLine());
 			switch(menu) {
 			case 1 :
-				//컨트롤러.충전(); // 충전하기
+				BalanceView.balancePlusUpdate(/*세션아이디(memberID)*/);// 충전하기
 				break;
 			case 2 :
-				//컨트롤러.인출(); // 인출하기
+				BalanceView.balanceMinusUpdate(/*세션아이디(memberID)*/);// 인출하기
 				break;
 			case 3 :
 				return;
@@ -28,6 +28,19 @@ public class BalanceView {
 				System.out.println("1, 2, 3 중에서만 입력 바랍니다.");
 			}
 		}
+	}
+
+	public static void balanceMinusUpdate(/*memberID*/) {
+		System.out.println("인출할 금액을 입력하세요: ");
+		int amount = Integer.parseInt(sc.nextLine());
+		
+		BalanceController.balanceMinusUpdate(memberId, amount);
+	}
+
+	public static void balancePlusUpdate(/*세션아이디(memberID)*/) {
+		System.out.println("충전할 금액을 입력하세요: ");
+		int amount = Integer.parseInt(sc.nextLine());
+		BalanceController.balancePlusUpdate(memberID, amount);
 	}
 
 	public static void printMenu() {

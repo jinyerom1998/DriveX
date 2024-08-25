@@ -12,7 +12,7 @@ public interface MemberReviewDAO
 	 * @param DealerStar = 딜러 별점
 	 * @return int => 성공여부
 	 */
-	int reviewInsert(int sessionNum, String title,String content,int CarStar, int DealerStar);
+	int reviewInsert(int sessionNum, String title,String content,int carStar, int dealerStar);
 	//각 평점이 int형인지 double형인지.
 	
 	

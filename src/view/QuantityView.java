@@ -2,6 +2,8 @@ package view;
 
 import java.util.Scanner;
 
+import controller.DealerController;
+
 public class QuantityView {
 	static Scanner sc = new Scanner(System.in);
 	
@@ -20,7 +22,7 @@ public class QuantityView {
 				QuantityView.updateQuantity();//수정
 				break;
 			case 2 :
-				//컨트롤러의 재고조회 함수 호출
+				DealerController.carSelectAll();//컨트롤러의 재고조회 함수 호출
 				break;
 			case 3 :
 				//나가기
@@ -43,5 +45,6 @@ public class QuantityView {
 		System.out.println("몇 대로 수정하시겠습니까?");
 		int carQuantity = Integer.parseInt(sc.nextLine());
 		//컨트롤러.수정함수(인수: carName, carQuantity)
+		DealerController.carQuantityPlusUpdate(carName, carQuantity);
 	}
 }

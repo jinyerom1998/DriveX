@@ -2,6 +2,8 @@ package view;
 
 import java.util.Scanner;
 
+import controller.MemberRegisterController;
+
 public class MenuView {
 	
 	private static Scanner sc = new Scanner(System.in);
@@ -51,9 +53,8 @@ public class MenuView {
 		System.out.println("회원 주소를 입력해주세요");
 		String address = sc.nextLine();		
 		
-		//Member member = new Member(String memberId, String password, String name, int age, String address)
-		
-		//컨트롤러의register함수호출(인수: Member)
+		//컨트롤러의register함수호출
+		MemberRegisterController.memberInsert(memberId,name,age,address,password);
 	}
 	
 	public static void login() {
@@ -64,7 +65,8 @@ public class MenuView {
 		 String password = sc.nextLine();
 		 
 		 //컨트롤러의login함수호출(인수: userId, userPwd); 
-		 //딜러면 딜러메뉴뷰, 멤버면 멤버메뉴뷰로 가게 해주세요~~
+		 LoginController.login(memberId, password);
+		 
 	}
 	
 }

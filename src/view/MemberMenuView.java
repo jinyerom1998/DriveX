@@ -2,6 +2,8 @@ package view;
 
 import java.util.Scanner;
 
+import controller.PurchaseController;
+
 public class MemberMenuView {
 	
 	static Scanner sc = new Scanner(System.in);
@@ -27,7 +29,7 @@ public class MemberMenuView {
 				ReviewView.menu(); //후기게시판
 				break;
 			case 4 :
-				//컨트롤러.구매내역조회함수 호출
+				PurchaseController.findBySessionNum(/*세션넘버*/);//컨트롤러.구매내역조회함수 호출
 				break;
 			case 5 :
 				BalanceView.menu();
