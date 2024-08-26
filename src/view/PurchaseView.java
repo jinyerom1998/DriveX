@@ -15,11 +15,11 @@ public class PurchaseView
         for(int i=0;i<dealers.size();i++)
         {
             Dealer dealer = dealers.get(i);
-            //System.out.println((i+1)+dealer.getName()+"-"dealer.getSelf());
+            System.out.println((i+1)+dealer.getDealerName()+"-"+dealer.getSelf());
             // 아직 딜러의 이름을 dto에서 설정하지 않은 상태
         }
         int choice=Integer.parseInt(scan.nextLine());
-        return dealers.get(choice-1);
+        return dealers.get(choice-1);//자바에서는 0부터 인덱스가 시작하므로
     }
 
     // 2. 차량 선택하기(카테고리 및 모델)
@@ -110,7 +110,7 @@ public class PurchaseView
         System.out.println("1. 예");
         System.out.println("2. 아니오");
         int choice=Integer.parseInt(scan.nextLine());
-        return (choice == 1);
+        return (choice == 1);// 1을 고르면 참을 반환
     }
 
     //충전할 금액 입력
@@ -135,11 +135,13 @@ public class PurchaseView
         System.out.println("구매가 취소되었습니다");
     }
 
+    //잔액이 부족한 경우에 나오는 메시지
     public static void displayInSufficientBalance()
     {
         System.out.println("잔액이 부족합니다");
     }
 
+    //충전하는 경우
     public static int enterRechargeAmount(int totalPrice)
     {
         System.out.println("충전할 금액을 입력하시오 : ");

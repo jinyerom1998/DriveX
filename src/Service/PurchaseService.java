@@ -11,7 +11,7 @@ public interface PurchaseService {
 	 * Dealer를 고를 때 보여주는 Dealer 자기소개
 	 * @return List<Dealer>
 	 */
-	List<Dealer> DealerChoice();
+	List<Dealer> DealerChoice() throws SQLException;
 
 	/**
 	 * 순서) 6번.
