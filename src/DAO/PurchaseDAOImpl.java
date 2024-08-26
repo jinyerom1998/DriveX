@@ -9,15 +9,14 @@ import java.util.List;
 
 import DTO.Dealer;
 import DTO.MemberSession;
-import DTO.DealerSession;
 import DBManager.DBManager;
 
-public class PurchaseDAOImpl implements PurchaseDAO {
-
+public class PurchaseDAOImpl implements PurchaseDAO
+{
 
 	private static PurchaseDAOImpl instance;
 
-    public PurchaseDAOImpl() {}
+	public PurchaseDAOImpl() {}
 
 	public static PurchaseDAOImpl getInstance()
 	{
@@ -44,7 +43,8 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
 
-			while (rs.next()) {
+			while (rs.next())
+			{
 				Dealer dealer = new Dealer();
 				dealer.setDealerNo(rs.getInt("dealer_no"));
 				dealer.setDealerId(rs.getString("dealer_id"));
@@ -72,7 +72,8 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	}
 
 	@Override
-	public List<String> getCarListByType(String type) throws SQLException {
+	public List<String> getCarListByType(String type) throws SQLException
+	{
 		List<String> carList = new ArrayList<>();
 		String query = "SELECT car_name FROM Car WHERE car_type = ?";
 
@@ -111,7 +112,8 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	}
 
 	@Override
-	public String getCarNoByCarName(String carName) throws SQLException {
+	public String getCarNoByCarName(String carName) throws SQLException
+	{
 		String carNo = null;
 		String query = "SELECT car_no FROM Car WHERE car_name = ?";
 
@@ -163,7 +165,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 			conn = DBManager.getConnection();
 			ps = conn.prepareStatement(query);
 
-			// 세션에서 member_no와 dealer_no 가져오기
+			// 세션에서 member_no 가져오기
 			int sessionNum = MemberSession.getInstance().getMemberNo();
 
 			ps.setInt(1, sessionNum);
@@ -173,10 +175,11 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 			ps.setInt(5, aroundView);
 			ps.setString(6, color);
 			ps.setInt(7, totalPrice);
-			ps.setInt(8, dealerNum); // 컨트롤러에서 딜러 이름을 통해 딜러번호를 얻어 옴
+			ps.setInt(8, dealerNum);
 
 			result = ps.executeUpdate();
-		} finally
+		}
+		finally
 		{
 			if (ps != null)
 			{
@@ -191,9 +194,10 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	}
 
 	@Override
-	public int getBasePriceByCarNo(String carNo) throws SQLException {
+	public int getBasePriceByCarNo(String carNo) throws SQLException
+	{
 		int basePrice = 0;
-		String query = "SELECT price FROM Car WHERE car_no = ?";//차량의 가격 가지고 옴
+		String query = "SELECT price FROM Car WHERE car_no = ?";
 
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -228,8 +232,8 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 		}
 		return basePrice;
 	}
-	
-	//옵션이름에 따라 옵션 가격을 가지고 옴
+
+	// 옵션 이름에 따라 옵션 가격을 가져옴
 	@Override
 	public int getSunRoofPrice() throws SQLException
 	{
@@ -248,8 +252,9 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 		return getOptionPriceByName("aroundView");
 	}
 
-	// 옵션이름에 따라 값을 가지고 오는 함수
-	private int getOptionPriceByName(String optionName) throws SQLException {
+	// 옵션 이름에 따라 값을 가져오는 함수
+	private int getOptionPriceByName(String optionName) throws SQLException
+	{
 		int optionPrice = 0;
 		String query = "SELECT option_price FROM CarOption WHERE option_name = ?";
 
@@ -286,16 +291,18 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 		}
 		return optionPrice;
 	}
+
 	@Override
 	public int updateMemberBalance(int memberNo, int amount) throws SQLException
 	{
 		String query = "UPDATE Member SET balance = balance - ? WHERE member_no = ?";
-		PreparedStatement ps=null;
-		Connection conn=null;
+		Connection conn = null;
+		PreparedStatement ps = null;
+
 		try
 		{
-			ps=conn.prepareStatement(query);
-			conn=DBManager.getConnection();
+			conn = DBManager.getConnection();
+			ps = conn.prepareStatement(query);
 			ps.setInt(1, amount);
 			ps.setInt(2, memberNo);
 			return ps.executeUpdate();
@@ -317,12 +324,13 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	public int updateCarQuantity(String carNo, int amount) throws SQLException
 	{
 		String query = "UPDATE Car SET quantity = quantity - ? WHERE car_no = ?";
-		PreparedStatement ps=null;
-		Connection conn=null;
+		Connection conn = null;
+		PreparedStatement ps = null;
+
 		try
 		{
-			ps = conn.prepareStatement(query);
 			conn = DBManager.getConnection();
+			ps = conn.prepareStatement(query);
 			ps.setInt(1, amount);
 			ps.setString(2, carNo);
 			return ps.executeUpdate();
@@ -338,29 +346,26 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 				conn.close();
 			}
 		}
-
 	}
 
 	@Override
 	public int getBalanceBySessionId(int memberNo) throws SQLException
 	{
 		String query = "SELECT balance FROM Member WHERE member_no = ?";
-		PreparedStatement ps=null;
-		Connection conn=null;
-		ResultSet rs=null;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
 		try
 		{
-			ps = conn.prepareStatement(query);
 			conn = DBManager.getConnection();
-
+			ps = conn.prepareStatement(query);
 			ps.setInt(1, memberNo);
-			try
+			rs = ps.executeQuery();
+
+			if (rs.next())
 			{
-				rs=ps.executeQuery();
-				if (rs.next())
-				{
-					return rs.getInt("balance");
-				}
+				return rs.getInt("balance");
 			}
 		}
 		finally
