@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,14 +14,19 @@ public class ReviewController {
 	static DealerReviewService dealerReviewService = new DealerReviewServiceImpl();
 	static MemberReviewService memberReviewService = new MemberReviewServiceImpl();
 	
-	public static void findBySessionNum(int sessionNum) {
+	public static void findBySessionNum(int sessionNum) throws SQLException {
 		int result=0;
 		
 		//현재 로그인된 세션넘버가 구매내역테이블의 세션과 일치하는지 확인해야 한다->
-		result = dealerReviewService.findBySessionNum(sessionNum);
+		try {
+			result = dealerReviewService.findBySessionNum(sessionNum);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if(result==0) {
-			throw new Exception();
+			throw new SQLException();
 		}
 		
 	}

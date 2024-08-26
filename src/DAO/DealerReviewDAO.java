@@ -1,6 +1,7 @@
 package DAO;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import DTO.Reply;
@@ -16,7 +17,7 @@ public interface DealerReviewDAO
 	 * @param dealerId
 	 * @return List<Review>
 	 */
-	List<Review> selectReviewByNum(int sessionNum);
+	List<Review> selectReviewByNum()throws SQLException;
 	
 	/**
 	 * purchaseNumFindBySessionNum() 호출후 구매번호를 받는다.
@@ -27,7 +28,7 @@ public interface DealerReviewDAO
 	 * @param dealerNo
 	 * @return Reply리스트를 리턴
 	 */
-	List<Reply> selectReplyByNum(Connection con,int sessionNum);
+	List<Reply> selectReplyByNum(Connection con,int sessionNum)throws Exception;
 	
 	/**
 	 * 회원or딜러 번호로 구매번호를 찾기
@@ -36,13 +37,15 @@ public interface DealerReviewDAO
 	 * @return 번호가 왔을때 구매내역과 비교후 구매번호를 찾아내서 리턴하는 메소드
 	 *   
 	 */
-	int purchaseNumFindBySessionNum(int sessionNum);
+	int purchaseNumFindByDealerSessionNum(int sessionNum)throws Exception;
+	
+	public int purchaseNumFindByMemberSessionNum()throws Exception; 
 	
 	/**
 	 * replyDuplication()호출 후 리뷰를 리턴 받고,
 	 * 리뷰의 리뷰번호를 갖고 Insert한다. 
 	 */
-	int replyInsert(int sessionNum, String content);
+	int replyInsert(int replyNo,String content)throws SQLException;
 	
 	
 	/**
@@ -51,5 +54,5 @@ public interface DealerReviewDAO
 	 * 만약 reply에 해당 구매번호가 없다면 reviewNum리턴.
 	 * 있다면 이셉션 날려도됨.  
 	 */
-	int replyDuplication(int sessionNum);
+	int replyDuplication(int sessionNum)throws Exception;
 }
