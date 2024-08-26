@@ -18,9 +18,12 @@ public class DealerController {
 	static DealerReviewService dealerReviewService = new DealerReviewServiceImpl();
 	
 	public static void carQuantityPlusUpdate(String carName,int amount) {
-		Car car;
+		Car car=null;
+		System.out.println("자살각");
 		try {
+			
 			car = dealerService.carSelectByCarName(carName);
+			System.out.println("여긴가");
 			dealerService.carQuantityPlusUpdate(car, amount);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -29,8 +32,14 @@ public class DealerController {
 	
 	public static void carSelectAll(){
 		List<Car> listCar = new ArrayList<Car>();
+		try {
+			listCar = dealerService.carSelectAll();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (listCar.size()==0) {
-			System.out.println("조회된 차량이 없습니다.");;
+			System.out.println("조회된 차량이 없습니다.");
 		}
 		//listCar출력하는 뷰 출력
 		for(Car car : listCar) {

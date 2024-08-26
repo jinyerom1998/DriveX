@@ -2,6 +2,7 @@ package view;
 
 import java.util.Scanner;
 
+import DTO.DealerSession;
 import controller.DealerController;
 
 public class QuantityView {
@@ -10,10 +11,11 @@ public class QuantityView {
 	public static void menu() {
 		while(true) {
 			
-			System.out.println("딜러의 아이디와 딜러의 평점을 세션으로 출력하는 곳");
-			//SesseionSet ss = SessionSet.getInstance();
-			//System.out.println(ss.getSet());
+			//딜러의 아이디와 딜러의 평점을 세션으로 출력하는 곳
 			
+			DealerSession dealerSession = DealerSession.getInstance();
+			
+			System.out.println("딜러ID: "+dealerSession.getDealerId()+" | 딜러평점: "+dealerSession.getRate());
 			QuantityView.printMenu();
 			
 			int menu = Integer.parseInt(sc.nextLine());

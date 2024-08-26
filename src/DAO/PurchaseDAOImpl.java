@@ -1,65 +1,335 @@
 package DAO;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import DTO.Dealer;
+import DTO.MemberSession;
+import DTO.DealerSession;
+import DBManager.DBManager;
 
 public class PurchaseDAOImpl implements PurchaseDAO {
 
+
+	private static PurchaseDAOImpl instance;
+
+    public PurchaseDAOImpl() {}
+
+	public static PurchaseDAOImpl getInstance()
+	{
+		if (instance == null)
+		{
+			instance = new PurchaseDAOImpl();
+		}
+		return instance;
+	}
+
 	@Override
-	public List<Dealer> DealerChoice() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Dealer> getAllDealers() throws SQLException
+	{
+		List<Dealer> dealers = new ArrayList<>();
+		String query = "SELECT dealer_no, dealer_id, self, rate FROM Dealer";
+
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try
+		{
+			conn = DBManager.getConnection();
+			ps = conn.prepareStatement(query);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Dealer dealer = new Dealer();
+				dealer.setDealerNo(rs.getInt("dealer_no"));
+				dealer.setDealerId(rs.getString("dealer_id"));
+				dealer.setSelf(rs.getString("self"));
+				dealer.setRate((int) rs.getDouble("rate"));
+				dealers.add(dealer);
+			}
+		}
+		finally
+		{
+			if (rs != null)
+			{
+				rs.close();
+			}
+			if (ps != null)
+			{
+				ps.close();
+			}
+			if (conn != null)
+			{
+				conn.close();
+			}
+		}
+		return dealers;
 	}
 
 	@Override
 	public List<String> getCarListByType(String type) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> carList = new ArrayList<>();
+		String query = "SELECT car_name FROM Car WHERE car_type = ?";
+
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try
+		{
+			conn = DBManager.getConnection();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, type);
+			rs = ps.executeQuery();
+
+			while (rs.next())
+			{
+				carList.add(rs.getString("car_name"));
+			}
+		}
+		finally
+		{
+			if (rs != null)
+			{
+				rs.close();
+			}
+			if (ps != null)
+			{
+				ps.close();
+			}
+			if (conn != null)
+			{
+				conn.close();
+			}
+		}
+		return carList;
 	}
 
 	@Override
 	public String getCarNoByCarName(String carName) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		String carNo = null;
+		String query = "SELECT car_no FROM Car WHERE car_name = ?";
+
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try
+		{
+			conn = DBManager.getConnection();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, carName);
+			rs = ps.executeQuery();
+
+			if (rs.next())
+			{
+				carNo = rs.getString("car_no");
+			}
+		}
+		finally
+		{
+			if (rs != null)
+			{
+				rs.close();
+			}
+			if (ps != null)
+			{
+				ps.close();
+			}
+			if (conn != null)
+			{
+				conn.close();
+			}
+		}
+		return carNo;
 	}
 
 	@Override
-	public int getColorPrice(String color) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public int purchaseInsert(String carNo, int dealerNum, String color, int sunRoof, int coolSeat, int aroundView, int totalPrice) throws SQLException {
+		String query = "INSERT INTO Purchase (member_no, car_no, sunroof, seat, around_view, color, price, dealer_no) " +
+				"VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		int result;
 
-	@Override
-	public int getSunRoofPrice() throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		Connection conn = null;
+		PreparedStatement ps = null;
 
-	@Override
-	public int getCoolSeatPrice() throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		try
+		{
+			conn = DBManager.getConnection();
+			ps = conn.prepareStatement(query);
 
-	@Override
-	public int getAroundViewPrice() throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+			// 세션에서 member_no와 dealer_no 가져오기
+			int sessionNum = MemberSession.getInstance().getMemberNo();
+			int dealerSessionNum = DealerSession.getInstance().getDealerNo();
 
-	@Override
-	public int purchaseInsert(String sessionId, String carNo, int dealerNum, String color, int sunRoof, int coolSeat,
-			int aroundView, int totalPrice) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+			ps.setInt(1, sessionNum);
+			ps.setString(2, carNo);
+			ps.setInt(3, sunRoof);
+			ps.setInt(4, coolSeat);
+			ps.setInt(5, aroundView);
+			ps.setString(6, color);
+			ps.setInt(7, totalPrice);
+			ps.setInt(8, dealerSessionNum);
+
+			result = ps.executeUpdate();
+		} finally
+		{
+			if (ps != null)
+			{
+				ps.close();
+			}
+			if (conn != null)
+			{
+				conn.close();
+			}
+		}
+		return result;
 	}
 
 	@Override
 	public int getBasePriceByCarNo(String carNo) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		int basePrice = 0;
+		String query = "SELECT price FROM Car WHERE car_no = ?";
+
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try
+		{
+			conn = DBManager.getConnection();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, carNo);
+			rs = ps.executeQuery();
+
+			if (rs.next())
+			{
+				basePrice = rs.getInt("price");
+			}
+		}
+		finally
+		{
+			if (rs != null)
+			{
+				rs.close();
+			}
+			if (ps != null)
+			{
+				ps.close();
+			}
+			if (conn != null)
+			{
+				conn.close();
+			}
+		}
+		return basePrice;
 	}
 
+
+	//옵션이름에 따라 옵션 가격을 가지고 옴
+	@Override
+	public int getSunRoofPrice() throws SQLException
+	{
+		return getOptionPriceByName("sunroof");
+	}
+
+	@Override
+	public int getCoolSeatPrice() throws SQLException
+	{
+		return getOptionPriceByName("coolSeat");
+	}
+
+	@Override
+	public int getAroundViewPrice() throws SQLException
+	{
+		return getOptionPriceByName("aroundView");
+	}
+
+	// 옵션이름에 따라 값을 가지고 오는 함수
+	private int getOptionPriceByName(String optionName) throws SQLException {
+		int optionPrice = 0;
+		String query = "SELECT option_price FROM CarOption WHERE option_name = ?";
+
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try
+		{
+			conn = DBManager.getConnection();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, optionName);
+			rs = ps.executeQuery();
+
+			if (rs.next())
+			{
+				optionPrice = rs.getInt("option_price");
+			}
+		}
+		finally
+		{
+			if (rs != null)
+			{
+				rs.close();
+			}
+			if (ps != null)
+			{
+				ps.close();
+			}
+			if (conn != null)
+			{
+				conn.close();
+			}
+		}
+		return optionPrice;
+	}
+	@Override
+	public int updateMemberBalance(int memberNo, int amount) throws SQLException
+	{
+		String query = "UPDATE Member SET balance = balance - ? WHERE member_no = ?";
+		try (Connection conn = DBManager.getConnection();
+			 PreparedStatement ps = conn.prepareStatement(query)) //finally마록 그냥 닫아
+		{
+			ps.setInt(1, amount);
+			ps.setInt(2, memberNo);
+			return ps.executeUpdate();
+		}
+	}
+
+	@Override
+	public int updateCarQuantity(String carNo, int amount) throws SQLException
+	{
+		String query = "UPDATE Car SET quantity = quantity - ? WHERE car_no = ?";
+		try (Connection conn = DBManager.getConnection();
+			 PreparedStatement ps = conn.prepareStatement(query))
+		{
+			ps.setInt(1, amount);
+			ps.setString(2, carNo);
+			return ps.executeUpdate();
+		}
+	}
+
+	@Override
+	public int getBalanceBySessionId(int memberNo) throws SQLException
+	{
+		String query = "SELECT balance FROM Member WHERE member_no = ?";
+		try (Connection conn = DBManager.getConnection();
+			 PreparedStatement ps = conn.prepareStatement(query))
+		{
+			ps.setInt(1, memberNo);
+			try (ResultSet rs = ps.executeQuery())
+			{
+				if (rs.next())
+				{
+					return rs.getInt("balance");
+				}
+			}
+		}
+		return 0;
+	}
 }

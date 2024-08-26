@@ -85,21 +85,27 @@ public class DealerDAOImpl implements DealerDAO {
 
 	@Override
 	public int carQuantityPlusUpdate(Car car, int amount) throws SQLException {
+		System.out.println("ddddd");
+		
 		DealerSession dealerSession = DealerSession.getInstance();
 		int result = 0;
 		
 		Connection con=null;
 		PreparedStatement ps=null;
+		String sql = "update car set quantity=quantity+? where car_name=?";
 		
 		try {
+			System.out.println("eeeeeee");
 			con = DBManager.getConnection();
-			ps= con.prepareStatement("update car set quantity=? where car_name=?");
-			ps.setInt(1, car.getQuantity()+amount);
+			ps= con.prepareStatement(sql);
+			
+			
+			ps.setInt(1, amount);
 			ps.setString(2, car.getCarName());
+			
 				
-			ps.executeQuery();
-				
-			result = 1;
+			result = ps.executeUpdate();
+			System.out.println("result: "+result);
 		}finally {
 			DBManager.dbClose(con, ps);
 		}
@@ -142,7 +148,7 @@ public class DealerDAOImpl implements DealerDAO {
 			ps= con.prepareStatement("select * from car where category=?");
 			ps.setString(1, "SUV");
 				
-			ps.executeQuery();
+			rs=ps.executeQuery();
 				
 			while(rs.next()) {
 				Car car = new Car(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getInt(7),rs.getString(8));
@@ -168,7 +174,7 @@ public class DealerDAOImpl implements DealerDAO {
 			ps= con.prepareStatement("select * from car where category=?");
 			ps.setString(1, "세단");
 				
-			ps.executeQuery();
+			rs=ps.executeQuery();
 				
 			while(rs.next()) {
 				Car car = new Car(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getInt(7),rs.getString(8));
@@ -184,8 +190,25 @@ public class DealerDAOImpl implements DealerDAO {
 	@Override
 	public List<Car> carSelectAll() throws SQLException {
 		List<Car> listCar = new ArrayList<Car>();
-		listCar.addAll(carSelectSuv());
-		listCar.addAll(carSelectSedan());
+		
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs = null;
+		
+		try {
+			con = DBManager.getConnection();
+			ps= con.prepareStatement("select * from car");
+				
+			rs=ps.executeQuery();
+				
+			while(rs.next()) {
+				Car car = new Car(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getInt(7),rs.getString(8));
+				listCar.add(car);
+			}
+		}finally {
+			DBManager.dbClose(con, ps, rs);
+		}
+		
 		return listCar;
 	}
 
@@ -202,7 +225,7 @@ public class DealerDAOImpl implements DealerDAO {
 			ps= con.prepareStatement("select * from car where car_name=?");
 			ps.setString(1, CarName);
 				
-			ps.executeQuery();
+			rs=ps.executeQuery();
 				
 			while(rs.next()) {
 				car = new Car(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getInt(7),rs.getString(8));
@@ -223,7 +246,7 @@ public class DealerDAOImpl implements DealerDAO {
 		double result = 0;
 		try {
 			con = DBManager.getConnection();
-			ps= con.prepareStatement("select deal_star from review where dealer_id=(select dealer_no from purchase where dealer_no=(select deal_no from dealer where dealer_id=?))");
+			ps= con.prepareStatement("");
 			ps.setString(1, DealerId);
 				
 			ps.executeQuery();
@@ -253,7 +276,7 @@ public class DealerDAOImpl implements DealerDAO {
 			ps= con.prepareStatement("select * from ?");
 			ps.setString(1, "dealer");
 				
-			ps.executeQuery();
+			rs=ps.executeQuery();
 			
 			while(rs.next()) {
 				Dealer dealer = new Dealer(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(7));

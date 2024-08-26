@@ -35,6 +35,7 @@ public class DealerServiceImpl implements DealerService {
 
 	@Override
 	public void carQuantityPlusUpdate(Car car, int amount) throws SQLException {
+		System.out.println("죽자");
 		dealerDAO.carQuantityPlusUpdate(car, amount);
 	}
 
