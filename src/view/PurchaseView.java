@@ -144,6 +144,7 @@ public class PurchaseView
     //충전하는 경우
     public static int enterRechargeAmount(int totalPrice)
     {
+        System.out.println("부족한 금액 : "+totalPrice);
         System.out.println("충전할 금액을 입력하시오 : ");
         return Integer.parseInt(scan.nextLine());
     }
