@@ -33,6 +33,8 @@ public class Dealer {
 		return dealerId;
 	}
 
+	public String getDealerName() {return dealerName;}
+
 	public String getDealerPass() {
 		return dealerPass;
 	}
