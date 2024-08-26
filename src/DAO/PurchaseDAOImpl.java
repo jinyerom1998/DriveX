@@ -300,6 +300,17 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 			ps.setInt(2, memberNo);
 			return ps.executeUpdate();
 		}
+		finally
+		{
+			if (ps != null)
+			{
+				ps.close();
+			}
+			if (conn != null)
+			{
+				conn.close();
+			}
+		}
 	}
 
 	@Override
@@ -315,6 +326,17 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 			ps.setInt(1, amount);
 			ps.setString(2, carNo);
 			return ps.executeUpdate();
+		}
+		finally
+		{
+			if (ps != null)
+			{
+				ps.close();
+			}
+			if (conn != null)
+			{
+				conn.close();
+			}
 		}
 
 	}
@@ -332,7 +354,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 			conn = DBManager.getConnection();
 
 			ps.setInt(1, memberNo);
-			try()
+			try
 			{
 				rs=ps.executeQuery();
 				if (rs.next())
