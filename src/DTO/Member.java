@@ -79,19 +79,6 @@ public class Member {
 		this.balance = balance;
 	}
 
-	public int hashCode() {
-		return memberId.hashCode();
-	}
-	public boolean equals(Object obj) {
-		Member other = (Member) obj;
-		if(memberId.equals(other.memberId)) {
-			return true;
-		}else {
-			return false;
-		}
-		
-	}
-
 	
 
 	

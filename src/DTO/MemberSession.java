@@ -4,7 +4,7 @@ package DTO;
 public class MemberSession {
 	private int memberNo;
 	private String memberId;
-	private String Name;
+	private String name;
 	private int age;
 	private String address;
 	private String password;
@@ -25,7 +25,7 @@ public class MemberSession {
 		return memberId;
 	}
 	public String getName() {
-		return Name;
+		return name;
 	}
 	public int getAge() {
 		return age;
@@ -46,7 +46,7 @@ public class MemberSession {
 		this.memberId = memberId;
 	}
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 	public void setAge(int age) {
 		this.age = age;
@@ -65,7 +65,7 @@ public class MemberSession {
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
-		Name = name;
+		this.name = name;
 		this.age = age;
 		this.address = address;
 		this.password = password;

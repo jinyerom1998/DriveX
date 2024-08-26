@@ -9,8 +9,9 @@ import DBManager.DBManager;
 import DTO.Member;
 
 public class MemberDAOImpl implements MemberDAO {
-
+	
 	@Override
+
 	public int memberInsert(String memberId, String name, int age, String address, String password) throws SQLException {
 	    Connection con = null;
 	    PreparedStatement ps = null;
@@ -123,22 +124,12 @@ public class MemberDAOImpl implements MemberDAO {
 		return result;
 	}
 
+
+
 	@Override
 	public int balanceMinusUpdate(String sessionId, int Amount) throws SQLException {
-		Connection con = null;
-		PreparedStatement ps = null;
-		int result = 0;
-
-		try {
-			con = DBManager.getConnection();
-			ps = con.prepareStatement(" ");
-			ps.setInt(1, Amount);
-
-		} finally {
-			DBManager.dbClose(con, ps);
-		}
-
-		return result;
+		// TODO Auto-generated method stub
+		return 0;
 	}
-
-}
+	
+}	

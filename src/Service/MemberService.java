@@ -28,8 +28,9 @@ public interface MemberService {
 	 * 
 	 * @param memberId = 회원아이디
 	 * @return Member = 회원
+	 * @throws Exception 
 	 */
-	Member selectMemberById(String memberId);
+	Member selectMemberById(String memberId) throws Exception;
 
 	/**
 	 * 충전하기

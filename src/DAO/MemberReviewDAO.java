@@ -1,5 +1,6 @@
 package DAO;
 
+import java.sql.Connection;
 import java.util.List;
 
 import DTO.Reply;
@@ -19,7 +20,6 @@ public interface MemberReviewDAO
 	 */
 	int reviewInsert(int sessionNum, String title,String content,int carStar, int dealerStar);
 	//각 평점이 int형인지 double형인지.
-	
 	
 	/**
 	 * 전체 리뷰보기(답글포함) => replySelectAll()함수 호출 

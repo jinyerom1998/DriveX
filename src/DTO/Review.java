@@ -35,8 +35,10 @@ public class Review {
 		this.carStar = carStar;
 		this.dealerStar = dealerStar;
 		this.reviewDate = reviewDate;
-	
+
 	}
+	
+	
 	public int getReviewNo() {
 		return reviewNo;
 	}

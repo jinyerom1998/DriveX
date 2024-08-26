@@ -6,15 +6,12 @@ import DAO.MemberDAO;
 import DAO.MemberDAOImpl;
 import DTO.Member;
 
+import DAO.MemberDAO;
+import DAO.MemberDAOImpl;
+
 public class MemberServiceImpl implements MemberService {
 	MemberDAO memberDAO = new MemberDAOImpl();
 
-	/**
-	 * 회원가입
-	 * 
-	 * @return int =>성공여부
-	 * @throws Exception 
-	 */
 
 	@Override
 	public void memberInsert(String memberId, String name, int age, String address, String password) throws Exception {
@@ -32,6 +29,7 @@ public class MemberServiceImpl implements MemberService {
 	 * @throws SQLException 
 	 */
 	@Override
+
 	public Member login(String memberId, String password) throws SQLException {
 	Member member = memberDAO.login(memberId , password);
 	
@@ -42,24 +40,25 @@ public class MemberServiceImpl implements MemberService {
 	return member;
 	}
 
+
 	/**
 	 * ID를 이용해서 해당 Member찾기
 	 * @param memberId = 회원아이디
 	 * @return Member = 회원
 	 */
 	@Override
-	public Member selectMemberById(String memberId) {
+	public Member selectMemberById(String memberId) throws Exception{
 	Member member = memberDAO.selectMemberById(memberId);
 	
 	if (! member.equals(memberId)) {
-		throw new NotFoundException("정보가 일치하지 않습니다.");
+		throw new Exception("정보가 일치하지 않습니다.");
 	}
 		
 	
 	return member;
 	}
 
-	@Override
+	/*@Override
 	public void balancePlusUpdate(String memberId, int Amount) {
 	Member member =  memberDAO.balancePlusUpdate(memberId, Amount);
 	
@@ -69,6 +68,6 @@ public class MemberServiceImpl implements MemberService {
 	public void balanceMinusUpdate(String memberId, int Amount) {
 		Member member =  memberDAO.balanceMinusUpdate(memberId, Amount);
 		
-	}
+	}*/
 
 }

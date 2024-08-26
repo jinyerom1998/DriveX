@@ -40,7 +40,7 @@ public class BalanceView {
 	public static void balancePlusUpdate(/*세션아이디(memberID)*/) {
 		System.out.println("충전할 금액을 입력하세요: ");
 		int amount = Integer.parseInt(sc.nextLine());
-		BalanceController.balancePlusUpdate(memberID, amount);
+		BalanceController.balancePlusUpdate(memberId, amount);
 	}
 
 	public static void printMenu() {

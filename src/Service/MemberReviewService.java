@@ -41,6 +41,6 @@ public interface MemberReviewService
 	 * @param MemberId
 	 * @return int => 성공여부
 	 */
-	int reviewDelete(int sessionNum);
+	void reviewDelete(int sessionNum);
 	
 }
