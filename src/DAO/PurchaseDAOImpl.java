@@ -49,7 +49,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 				dealer.setDealerNo(rs.getInt("dealer_no"));
 				dealer.setDealerId(rs.getString("dealer_id"));
 				dealer.setSelf(rs.getString("self"));
-				dealer.setRate((int) rs.getDouble("rate"));
+				dealer.setRate(rs.getInt("rate"));
 				dealers.add(dealer);
 			}
 		}
@@ -165,7 +165,6 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 
 			// 세션에서 member_no와 dealer_no 가져오기
 			int sessionNum = MemberSession.getInstance().getMemberNo();
-			int dealerSessionNum = DealerSession.getInstance().getDealerNo();
 
 			ps.setInt(1, sessionNum);
 			ps.setString(2, carNo);
@@ -174,7 +173,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 			ps.setInt(5, aroundView);
 			ps.setString(6, color);
 			ps.setInt(7, totalPrice);
-			ps.setInt(8, dealerSessionNum);
+			ps.setInt(8, dealerNum); // 컨트롤러에서 딜러 이름을 통해 딜러번호를 얻어 옴
 
 			result = ps.executeUpdate();
 		} finally
@@ -194,7 +193,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	@Override
 	public int getBasePriceByCarNo(String carNo) throws SQLException {
 		int basePrice = 0;
-		String query = "SELECT price FROM Car WHERE car_no = ?";
+		String query = "SELECT price FROM Car WHERE car_no = ?";//차량의 가격 가지고 옴
 
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -229,8 +228,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 		}
 		return basePrice;
 	}
-
-
+	
 	//옵션이름에 따라 옵션 가격을 가지고 옴
 	@Override
 	public int getSunRoofPrice() throws SQLException
@@ -292,9 +290,12 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	public int updateMemberBalance(int memberNo, int amount) throws SQLException
 	{
 		String query = "UPDATE Member SET balance = balance - ? WHERE member_no = ?";
-		try (Connection conn = DBManager.getConnection();
-			 PreparedStatement ps = conn.prepareStatement(query)) //finally마록 그냥 닫아
+		PreparedStatement ps=null;
+		Connection conn=null;
+		try
 		{
+			ps=conn.prepareStatement(query);
+			conn=DBManager.getConnection();
 			ps.setInt(1, amount);
 			ps.setInt(2, memberNo);
 			return ps.executeUpdate();
@@ -305,29 +306,54 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	public int updateCarQuantity(String carNo, int amount) throws SQLException
 	{
 		String query = "UPDATE Car SET quantity = quantity - ? WHERE car_no = ?";
-		try (Connection conn = DBManager.getConnection();
-			 PreparedStatement ps = conn.prepareStatement(query))
+		PreparedStatement ps=null;
+		Connection conn=null;
+		try
 		{
+			ps = conn.prepareStatement(query);
+			conn = DBManager.getConnection();
 			ps.setInt(1, amount);
 			ps.setString(2, carNo);
 			return ps.executeUpdate();
 		}
+
 	}
 
 	@Override
 	public int getBalanceBySessionId(int memberNo) throws SQLException
 	{
 		String query = "SELECT balance FROM Member WHERE member_no = ?";
-		try (Connection conn = DBManager.getConnection();
-			 PreparedStatement ps = conn.prepareStatement(query))
+		PreparedStatement ps=null;
+		Connection conn=null;
+		ResultSet rs=null;
+		try
 		{
+			ps = conn.prepareStatement(query);
+			conn = DBManager.getConnection();
+
 			ps.setInt(1, memberNo);
-			try (ResultSet rs = ps.executeQuery())
+			try()
 			{
+				rs=ps.executeQuery();
 				if (rs.next())
 				{
 					return rs.getInt("balance");
 				}
+			}
+		}
+		finally
+		{
+			if (rs != null)
+			{
+				rs.close();
+			}
+			if (ps != null)
+			{
+				ps.close();
+			}
+			if (conn != null)
+			{
+				conn.close();
 			}
 		}
 		return 0;

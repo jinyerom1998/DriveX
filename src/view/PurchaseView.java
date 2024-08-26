@@ -135,11 +135,13 @@ public class PurchaseView
         System.out.println("구매가 취소되었습니다");
     }
 
+    //잔액이 부족한 경우에 나오는 메시지
     public static void displayInSufficientBalance()
     {
         System.out.println("잔액이 부족합니다");
     }
 
+    //충전하는 경우
     public static int enterRechargeAmount(int totalPrice)
     {
         System.out.println("충전할 금액을 입력하시오 : ");

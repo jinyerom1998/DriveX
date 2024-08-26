@@ -9,7 +9,7 @@ import Service.PurchaseServiceImpl;
 import view.PurchaseView;
 
 public class PurchaseController {
-	// 싱글톤으로 사용될 서비스 인스턴스
+	// 딜러리뷰서비스에서 사용?
 //	static DealerReviewService dealerReviewService = DealerReviewServiceImpl.getInstance();
 //
 //	public static void findBySessionNum(int sessionNum) {
@@ -23,7 +23,7 @@ public class PurchaseController {
 //	}
 
 	/**
-	 * 구매 프로세스를 시작하는 메서드
+	 * 구매 프로세스를 시작
 	 */
 	public static void startPurchase() {
 		try {
@@ -33,7 +33,7 @@ public class PurchaseController {
 			List<Dealer> dealers = purchaseService.DealerChoice();//모든 딜러 정보들을 가지고 옴
 			Dealer selectedDealer = PurchaseView.displayDealersAndSelect(dealers);
 
-			// 2. 차량 타입 및 모델 선택
+			// 2. 차량 타입(카테고리) 및 모델 선택
 			int carTypeChoice = PurchaseView.chooseCarType();
 			List<String> carList = (carTypeChoice == 1) ? purchaseService.getCarListByType("SUV") : purchaseService.getCarListByType("Sedan");
 			// 1을 고르면 suv 목록을 얻고 나머지 경우에서는 sedan의 정보를 얻음

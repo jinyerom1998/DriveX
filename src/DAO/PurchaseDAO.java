@@ -14,7 +14,7 @@ public interface PurchaseDAO {
 	 * @throws SQLException 데이터베이스 접근 중 예외 발생 시
 	 */
 
-
+	//DealerDAO에더 같은 함수 있음
 	List<Dealer> getAllDealers() throws SQLException;
 
 	/**
@@ -81,9 +81,9 @@ public interface PurchaseDAO {
 	 * 그 다음에 1) 구매하기 - 잔액이 다 있을 경우 순서 8번으로 바로 이동
 	 *                     - 잔액이 없을 경우 순서 7번으로 이동한 후 8번 순으로 진행
 	 * 2) 나가기
-	 * 여기서 견적서를 테이블에 입력함
+	 * 여기서 견적서를 테이블에 입력
 	 *
-	 * 구매 정보를 데이터베이스에 삽입함
+	 * 구매 정보를 데이터베이스에 삽입
 	 * 사용자 세션 ID
 	 * @param carNo 차량 번호
 	 * @param dealerNum 딜러 번호
