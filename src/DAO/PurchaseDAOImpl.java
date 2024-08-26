@@ -75,7 +75,7 @@ public class PurchaseDAOImpl implements PurchaseDAO
 	public List<String> getCarListByType(String type) throws SQLException
 	{
 		List<String> carList = new ArrayList<>();
-		String query = "SELECT car_name FROM Car WHERE car_type = ?";
+		String query = "SELECT car_name FROM Car WHERE category = ?";
 
 		Connection conn = null;
 		PreparedStatement ps = null;
