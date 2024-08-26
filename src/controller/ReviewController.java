@@ -13,14 +13,14 @@ public class ReviewController {
 	static DealerReviewService dealerReviewService = new DealerReviewServiceImpl();
 	static MemberReviewService memberReviewService = new MemberReviewServiceImpl();
 	
-	public static void findBySessionNum(int sessionNum) {
+	public static void findBySessionNum(int sessionNum) throws Exception {
 		int result=0;
 		
 		//현재 로그인된 세션넘버가 구매내역테이블의 세션과 일치하는지 확인해야 한다->
 		result = dealerReviewService.findBySessionNum(sessionNum);
 		
 		if(result==0) {
-			throw new Exception();
+			throw new Exception("구매한 적 없습니다");
 		}
 		
 	}
@@ -32,8 +32,10 @@ public class ReviewController {
 		
 		if(listReview.size()==0) {
 			//등록된 리뷰가 없습니다 예외 발생
+			System.out.println("등록된 리뷰가 없습니다");
 		}else {
 			//등록된 리뷰 출력 뷰 호출
+			
 		}
 	}
 	
@@ -46,6 +48,7 @@ public class ReviewController {
 			memberReviewService.reviewDelete(sessionNum);
 		}catch (Exception e) {
 			// 삭제하려는 번호의 리뷰글이 없습니다 failView출력
+			System.out.println("삭제하려는 번호의 리뷰글이 없습니다");
 		}
 	}
 }

@@ -2,6 +2,7 @@ package view;
 
 import java.util.Scanner;
 
+import DTO.DealerSession;
 import controller.DealerController;
 
 public class DealerMenuView {
@@ -10,9 +11,12 @@ public class DealerMenuView {
 	public static void menu() {
 		while(true) {
 			
-			System.out.println("딜러의 아이디와 딜러의 평점을 세션으로 출력하는 곳");
-			//SesseionSet ss = SessionSet.getInstance();
-			//System.out.println(ss.getSet());
+			//딜러의 아이디와 딜러의 평점을 세션으로 출력하는 곳
+			
+			DealerSession dealerSession = DealerSession.getInstance();
+			
+			System.out.println("딜러ID: "+dealerSession.getDealerId()+" | 딜러평점: "+dealerSession.getRate());
+
 			
 			DealerMenuView.printMenu();
 			
@@ -25,7 +29,7 @@ public class DealerMenuView {
 				 DealerReviewView.menu();// 후기게시판
 				break;
 			case 3 :
-				//컨트롤러.실적조회함수 호출
+				DealerController.selectDealerStarByDealerId(dealerSession.getDealerId());//컨트롤러.실적조회함수 호출
 				break;
 			case 4 :
 				DealerMenuView.selfUpdate();//딜러정보수정

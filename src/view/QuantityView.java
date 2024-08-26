@@ -42,7 +42,7 @@ public class QuantityView {
 		System.out.println("어떤 차량의 재고량을 수정하시겠습니까?");
 		System.out.println("G70, G80, G90, GV60, GV70, GV80중에서 골라주세요");
 		String carName = sc.nextLine();
-		System.out.println("몇 대로 수정하시겠습니까?");
+		System.out.println("몇 대를 추가하시겠습니까?");
 		int carQuantity = Integer.parseInt(sc.nextLine());
 		//컨트롤러.수정함수(인수: carName, carQuantity)
 		DealerController.carQuantityPlusUpdate(carName, carQuantity);

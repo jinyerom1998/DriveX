@@ -3,19 +3,22 @@ package DTO;
 public class Dealer {
 
 	private int dealerNo;
+	private String dealerName;
 	private String dealerId;
 	private String dealerPass;
 	private String dealerOption;
 	private String self;
 	private int rate;
 	
+	
 	public Dealer () {}
 
-	public Dealer(int dealerNo, String dealerId, String dealerPass, String dealerOption, String self,
+	public Dealer(int dealerNo, String dealerName, String dealerId, String dealerPass, String dealerOption, String self,
 			int rate) {
 		super();
 		this.dealerNo = dealerNo;
 		this.dealerId = dealerId;
+		this.dealerName = dealerName;
 		this.dealerPass = dealerPass;
 		this.dealerOption = dealerOption;
 		this.self = self;

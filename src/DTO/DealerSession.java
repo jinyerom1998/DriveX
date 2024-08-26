@@ -7,8 +7,9 @@ public class DealerSession {
 	private String dealerOption;
 	private String self;
 	private int rate;
+	private String dealerName;
 	
-	private DealerSession() {}
+	public DealerSession() {}
 	
 	private static DealerSession ds = new DealerSession();
 	
@@ -52,7 +53,8 @@ public class DealerSession {
 	public void setRate(int rate) {
 		this.rate = rate;
 	}
-	public DealerSession(int dealerNo, String dealerId, String dealerPass, String dealerOption, String self, int rate) {
+	
+	public DealerSession(int dealerNo, String dealerName, String dealerId, String dealerPass, String dealerOption, String self, int rate) {
 		super();
 		this.dealerNo = dealerNo;
 		this.dealerId = dealerId;
@@ -60,7 +62,18 @@ public class DealerSession {
 		this.dealerOption = dealerOption;
 		this.self = self;
 		this.rate = rate;
+		this.dealerName = dealerName;
 	}
+
+	public String getDealerName() {
+		return dealerName;
+	}
+
+	public void setDealerName(String dealerName) {
+		this.dealerName = dealerName;
+	}
+	
+	
 	
 	
 }

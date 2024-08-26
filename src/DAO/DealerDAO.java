@@ -1,5 +1,6 @@
 package DAO;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import DTO.Car;
@@ -12,8 +13,9 @@ public interface DealerDAO
 	 * @param dealerId 아이디
 	 * @param password 패스워드 
 	 * @return int => 성공여부
+	 * @throws SQLException 
 	 */
-	int login(String dealerId,String password);
+	int login(String dealerId,String password) throws SQLException;
 	
 	/**
 	 * Dealer찾기
@@ -30,8 +32,9 @@ public interface DealerDAO
 	 * @param contents = 자기소개란
 	 * @param sessionId = 로그인중인 id
 	 * @return int => 성공여부
+	 * @throws SQLException 
 	 */
-	int dealerUpdate(String sessionId,String contents);
+	int dealerUpdate(String sessionId,String contents) throws SQLException;
 	
 	
 	/**
@@ -39,8 +42,9 @@ public interface DealerDAO
 	 * @param Car = 자동차 	=>carSelectByCarName()호출 후 리턴받기
 	 * @param amount = 입고수량
 	 * @return int => 성공여부
+	 * @throws SQLException 
 	 */
-	int carQuantityPlusUpdate(Car car,int amount);
+	int carQuantityPlusUpdate(Car car,int amount) throws SQLException;
 	
 	
 	/**
@@ -48,8 +52,9 @@ public interface DealerDAO
 	 * @param Car = 자동차 	=>carSelectByCarName()호출 후 리턴받기
 	 * @param amount = 출고수량 (양수로 적기 ex) 차량구매시 int amount = 1로 되게 querry문 Quantity - ? 식으로 적기) 
 	 * @return
+	 * @throws SQLException 
 	 */
-	 int carQuantityMinusUpdate(Car car,int amount);
+	 int carQuantityMinusUpdate(Car car,int amount) throws SQLException;
 	 
 	 
 	 /**
@@ -57,37 +62,42 @@ public interface DealerDAO
 	  *
 	  * @return List<Car> 
 	  * "select * from CAR where 카테고리 like '%v%'  라는 쿼리문 쓰기.
+	 * @throws SQLException 
 	  */
-	 List<Car> carSelectSuv();
+	 List<Car> carSelectSuv() throws SQLException;
 	 
 	 
 	 /**
 	  * 세단일때 차조회
 	  * @return List<Car>
 	  * "select * from CAR where not 카테고리 like '%v%' 라는 쿼리문 쓰기 
+	 * @throws SQLException 
 	  */
-	 List<Car> carSelectSedan();
+	 List<Car> carSelectSedan() throws SQLException;
 	 
 	 
 	 /**
 	  * 모든 차 조회
 	  * @return List<Car>
+	 * @throws SQLException 
 	  */
-	 List<Car> carSelectAll();
+	 List<Car> carSelectAll() throws SQLException;
 	
 	 
 	 /**
 	  * 특정 차 정보 찾기
 	  * @param CarName
 	  * @return Car
+	 * @throws SQLException 
 	  */
-	 Car carSelectByCarName(String CarName);
+	 Car carSelectByCarName(String CarName) throws SQLException;
 	 
 	 /**
 	  * 딜러평점조회
 	  * @param DealerId => 세션에서 현재 로그인되있는 딜러의 ID
 	  * @return double => 'AVG 딜러평점' 해서 나온 값
+	 * @throws SQLException 
 	  */
-	 double selectDealerStarByDealerId(String DealerId);
+	 double selectDealerStarByDealerId(String DealerId) throws SQLException;
 	 
 }

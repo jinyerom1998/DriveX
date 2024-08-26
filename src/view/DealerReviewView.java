@@ -2,6 +2,7 @@ package view;
 
 import java.util.Scanner;
 
+import DTO.DealerSession;
 import controller.DealerController;
 
 public class DealerReviewView {
@@ -11,15 +12,18 @@ public class DealerReviewView {
 		while(true) {
 			
 			System.out.println("딜러의 아이디와 딜러의 평점을 세션으로 출력하는 곳");
-			//SesseionSet ss = SessionSet.getInstance();
-			//System.out.println(ss.getSet());
+
+			DealerSession dealerSession = DealerSession.getInstance();
+			
+			System.out.println("딜러ID: "+dealerSession.getDealerId()+" | 딜러평점: "+dealerSession.getRate());
+
 			
 			DealerReviewView.printMenu();
 			
 			int menu = Integer.parseInt(sc.nextLine());
 			switch(menu) {
 			case 1 :
-				DealerController.reviewSelectAll(/*딜러아이디*/); //컨트롤러의 조회함수 호출 //조회
+				DealerController.reviewSelectAll(dealerSession.getDealerNo()); //컨트롤러의 조회함수 호출 //조회
 				break;
 			case 2 :
 				DealerReviewView.registerReply();//답글달기
