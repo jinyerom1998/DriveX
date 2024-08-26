@@ -6,6 +6,9 @@ import java.util.List;
 import DTO.Dealer;
 import Service.PurchaseService;
 import Service.PurchaseServiceImpl;
+import com.sun.tools.javac.Main;
+import view.MemberMenuView;
+import view.MenuView;
 import view.PurchaseView;
 
 public class PurchaseController {
@@ -77,25 +80,26 @@ public class PurchaseController {
 						{ // 충전했는데도 잔액이 부족하다면 주문 취소
 							PurchaseView.displayInSufficientBalance();
 							PurchaseView.displayPurchaseCancelled();
-							return; // 상위 메뉴로 올라감
+							MemberMenuView.menu(); // 상위 메뉴로 올라감
 						}
 					}
 					else
 					{ // 충전하지 않는 경우 주문 취소
 						PurchaseView.displayPurchaseCancelled();
-						return; // 상위 메뉴 or 메인메뉴로
+						MemberMenuView.menu(); // 상위 메뉴 or 메인메뉴로
 					}
 				}
 				else
 				{ // 잔고가 충분한 경우
 					finalizePurchase(carNo, selectedDealer.getDealerNo(), selectedColor, sunRoof, coolSeat, aroundView, totalPrice);
 					PurchaseView.displayPurchaseSuccess();
+					MemberMenuView.menu();//구매가 끝나도 메인 화면으로
 				}
 			}
 			else
 			{ // 구매를 취소하는 경우
 				PurchaseView.displayPurchaseCancelled();
-				return; // 상위 메뉴 or 메인메뉴로
+				MemberMenuView.menu(); // 상위 메뉴 or 메인메뉴로
 			}
 
 		} catch (SQLException e) {
