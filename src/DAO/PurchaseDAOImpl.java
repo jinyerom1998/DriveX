@@ -151,10 +151,10 @@ public class PurchaseDAOImpl implements PurchaseDAO
 		return carNo;
 	}
 
-	@Override
+	@Override//수정 필요!! 구매번호?
 	public int purchaseInsert(String carNo, int dealerNum, String color, int sunRoof, int coolSeat, int aroundView, int totalPrice) throws SQLException {
-		String query = "INSERT INTO Purchase (member_no, car_no, sunroof, seat, around_view, color, price, dealer_no) " +
-				"VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO Purchase (purchase_no,member_no,sunroof, seat, around_view, color, price, dealer_no,car_no) " +
+				"VALUES (purchase_no_seq.NEXTVAL,?, ?, ?, ?, ?, ?, ?, ?)";
 		int result;
 
 		Connection conn = null;
@@ -230,7 +230,7 @@ public class PurchaseDAOImpl implements PurchaseDAO
 				conn.close();
 			}
 		}
-		return basePrice;
+		return basePrice;//차량 기본 가격
 	}
 
 	// 옵션 이름에 따라 옵션 가격을 가져옴
