@@ -1,5 +1,10 @@
 package DAO;
 
+import java.util.List;
+
+import DTO.Reply;
+import DTO.Review;
+
 public interface MemberReviewDAO 
 {
 	

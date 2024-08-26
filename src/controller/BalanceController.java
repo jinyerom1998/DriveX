@@ -1,9 +1,10 @@
 package controller;
 
 import Service.MemberService;
+import Service.MemberServiceImpl;
 
 public class BalanceController {
-	static MemberService memberService = new MemberService();
+	static MemberService memberService = new MemberServiceImpl();
 	
 	public static void balancePlusUpdate(String memberId,int amount){
 		memberService.balancePlusUpdate(memberId, amount);

@@ -1,8 +1,9 @@
 package Service;
 
-import DAO.List;
-import DAO.Reply;
-import DAO.Review;
+import java.util.List;
+
+import DTO.Reply;
+import DTO.Review;
 
 public interface MemberReviewService 
 {

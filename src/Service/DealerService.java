@@ -2,8 +2,8 @@ package Service;
 
 import java.util.List;
 
-import DAO.Car;
-import DAO.Dealer;
+import DTO.Car;
+import DTO.Dealer;
 
 public interface DealerService 
 {

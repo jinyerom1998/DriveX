@@ -2,9 +2,8 @@ package Service;
 
 import java.util.List;
 
-import DAO.Connection;
-import DAO.Reply;
-import DAO.Review;
+import DTO.Reply;
+import DTO.Review;
 
 public interface DealerReviewService 
 {

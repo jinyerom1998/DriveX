@@ -1,9 +1,10 @@
 package controller;
 
 import Service.DealerReviewService;
+import Service.DealerReviewServiceImpl;
 
 public class PurchaseController {
-	static DealerReviewService dealerReviewService = new DealerReviewService();
+	static DealerReviewService dealerReviewService = new DealerReviewServiceImpl();
 
 	public static void findBySessionNum(int sessionNum) {
 		int result = 0;

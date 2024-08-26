@@ -2,7 +2,8 @@ package DAO;
 
 import java.sql.SQLException;
 import java.util.List;
-import model.Dealer;
+
+import DTO.Dealer;
 
 public interface PurchaseDAO {
 

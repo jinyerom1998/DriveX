@@ -1,6 +1,10 @@
 package DAO;
 
+import java.sql.Connection;
 import java.util.List;
+
+import DTO.Reply;
+import DTO.Review;
 
 public interface DealerReviewDAO 
 {

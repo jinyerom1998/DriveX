@@ -3,12 +3,15 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import DTO.Review;
 import Service.DealerReviewService;
+import Service.DealerReviewServiceImpl;
 import Service.MemberReviewService;
+import Service.MemberReviewServiceImpl;
 
 public class ReviewController {
-	static DealerReviewService dealerReviewService = new DealerReviewService();
-	static MemberReviewService memberReviewService = new MemberReviewService();
+	static DealerReviewService dealerReviewService = new DealerReviewServiceImpl();
+	static MemberReviewService memberReviewService = new MemberReviewServiceImpl();
 	
 	public static void findBySessionNum(int sessionNum) {
 		int result=0;

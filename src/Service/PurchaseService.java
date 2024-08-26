@@ -1,9 +1,10 @@
-package service;
+package Service;
 
 import java.util.List;
-import model.Dealer;
 
-public interface PurchaseServiceInterface {
+import DTO.Dealer;
+
+public interface PurchaseService {
 
 	/**
 	 * 순서) 1번. 딜러 선택하기일 때

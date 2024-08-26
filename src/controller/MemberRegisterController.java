@@ -1,10 +1,11 @@
 package controller;
 
 import Service.MemberService;
+import Service.MemberServiceImpl;
 
 public class MemberRegisterController { //회원가입컨트롤러
 	
-	static MemberService memberService = new MemberService();
+	static MemberService memberService = new MemberServiceImpl();
 	
 	public static void memberInsert(String memberId, String name, int age, String address, String password) {
 		try {

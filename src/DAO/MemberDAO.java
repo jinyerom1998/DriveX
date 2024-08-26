@@ -1,5 +1,6 @@
 package DAO;
 
+import DTO.Member;
 
 public interface MemberDAO 
 {	

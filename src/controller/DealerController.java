@@ -3,15 +3,18 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import Service.Car;
+import DTO.Car;
 import Service.DealerReviewService;
+import Service.DealerReviewServiceImpl;
 import Service.DealerService;
+import Service.DealerServiceImpl;
 import Service.MemberReviewService;
+import Service.MemberReviewServiceImpl;
 
 public class DealerController {
-	static DealerService dealerService = new DealerService();
-	static MemberReviewService memberReviewService = new MemberReviewService();
-	static DealerReviewService dealerReviewService = new DealerReviewService();
+	static DealerService dealerService = new DealerServiceImpl();
+	static MemberReviewService memberReviewService = new MemberReviewServiceImpl();
+	static DealerReviewService dealerReviewService = new DealerReviewServiceImpl();
 	
 	public static void carQuantityPlusUpdate(String carName,int amount) {
 		Car car = dealerService.carSelectByCarName(carName);

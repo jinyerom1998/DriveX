@@ -2,6 +2,7 @@ package view;
 
 import java.util.Scanner;
 
+import controller.LoginController;
 import controller.MemberRegisterController;
 
 public class MenuView {

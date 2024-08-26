@@ -2,6 +2,9 @@ package DAO;
 
 import java.util.List;
 
+import DTO.Car;
+import DTO.Dealer;
+
 public interface DealerDAO 
 {
 	/**
