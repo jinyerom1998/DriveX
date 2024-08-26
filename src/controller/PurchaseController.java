@@ -83,7 +83,7 @@ public class PurchaseController {
 					else
 					{ // 충전하지 않는 경우 주문 취소
 						PurchaseView.displayPurchaseCancelled();
-						return;
+						return; // 상위 메뉴 or 메인메뉴로
 					}
 				}
 				else
@@ -95,6 +95,7 @@ public class PurchaseController {
 			else
 			{ // 구매를 취소하는 경우
 				PurchaseView.displayPurchaseCancelled();
+				return; // 상위 메뉴 or 메인메뉴로
 			}
 
 		} catch (SQLException e) {
