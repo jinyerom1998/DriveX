@@ -41,7 +41,7 @@ public class PurchaseController {
 			// 3. 차량 번호 선택
 			String carNo = purchaseService.getCarNoByCarName(selectedCarName);
 
-			// 4. 색상 선택
+			// 4. 색상 선택, 변수에 저장
 			String selectedColor = PurchaseView.chooseColor();
 
 			// 5. 옵션 선택

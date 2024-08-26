@@ -65,9 +65,7 @@ public class DealerReviewServiceImpl implements DealerReviewService {
 	}
 
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> origin/Young
+
 }

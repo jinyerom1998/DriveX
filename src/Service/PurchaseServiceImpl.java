@@ -33,9 +33,8 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 	//dealerDAO에서 해결
 	@Override
-	public List<Dealer> DealerChoice()
-	{
-		return dealerDAO.getAllDealers();
+	public List<Dealer> DealerChoice() throws SQLException {
+		return purchaseDAO.getAllDealers();
 	}
 
 	@Override

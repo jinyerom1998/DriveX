@@ -265,7 +265,7 @@ public class DealerDAOImpl implements DealerDAO {
 		return result;
 	}
 	
-	public List<Dealer> selectDealerAll() throws SQLException {
+	public List<Dealer> getAllDealers() throws SQLException {
 		List<Dealer> listDealer = new ArrayList<Dealer>();
 		Connection con=null;
 		PreparedStatement ps=null;
