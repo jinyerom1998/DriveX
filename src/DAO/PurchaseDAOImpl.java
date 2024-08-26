@@ -243,13 +243,13 @@ public class PurchaseDAOImpl implements PurchaseDAO
 	@Override
 	public int getCoolSeatPrice() throws SQLException
 	{
-		return getOptionPriceByName("coolSeat");
+		return getOptionPriceByName("seat");
 	}
 
 	@Override
 	public int getAroundViewPrice() throws SQLException
 	{
-		return getOptionPriceByName("aroundView");
+		return getOptionPriceByName("around_view");
 	}
 
 	// 옵션 이름에 따라 값을 가져오는 함수

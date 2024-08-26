@@ -98,8 +98,8 @@ public class PurchaseServiceImpl implements PurchaseService {
 	public int calculateTotalPrice(String carNo, String color, int sunRoof, int coolSeat, int aroundView) throws SQLException {
 		int basePrice=purchaseDAO.getBasePriceByCarNo(carNo);
 		int sunRoofPrice=sunRoof==1 ? purchaseDAO.getSunRoofPrice() : 0; // 썬루프가 선택된 경우에만 디비에서 정보 불러와
-		int coolSeatPrice=coolSeat==1 ? purchaseDAO.getSunRoofPrice() : 0;
-		int aroundViewPrice=aroundView==1 ? purchaseDAO.getSunRoofPrice() : 0;
+		int coolSeatPrice=coolSeat==1 ? purchaseDAO.getCoolSeatPrice() : 0;
+		int aroundViewPrice=aroundView==1 ? purchaseDAO.getAroundViewPrice() : 0;
 		return basePrice+sunRoofPrice+coolSeatPrice+aroundViewPrice;
 	}
 }
