@@ -52,6 +52,7 @@ public class DealerSession {
 	public void setRate(int rate) {
 		this.rate = rate;
 	}
+	
 	public DealerSession(int dealerNo, String dealerId, String dealerPass, String dealerOption, String self, int rate) {
 		super();
 		this.dealerNo = dealerNo;
