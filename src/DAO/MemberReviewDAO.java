@@ -51,7 +51,7 @@ public interface MemberReviewDAO
 	 * 만약 review에 해당 구매번호가 없다면 review리턴
 	 * 있다면 이셉션 날려도됨.
 	 */
-	Review reviewDuplication(int sessionNum);
+	Review reviewDuplication()throws Exception;
 	
 	
 	

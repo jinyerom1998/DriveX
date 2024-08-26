@@ -8,19 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DBManager.DBManager;
+import DTO.MemberSession;
 import DTO.Reply;
 import DTO.Review;
 
 public class MemberReviewDAOImpl implements MemberReviewDAO {
-	private static MemberReviewDAO memberReviewDao = new MemberReviewDAOImpl();
 	
-	private MemberReviewDAOImpl() {}
+	MemberSession memberSession = MemberSession.getInstance();
 	
-	public static MemberReviewDAO getInstance() {
-		return memberReviewDao;
-	}
-	
-	DealerReviewDAOImpl dDao = new DealerReviewDAOImpl();
+	DealerReviewDAO dealerReviewDAO = new DealerReviewDAOImpl();
 
 	@Override
 	public int reviewInsert(int sessionNum, String title, String content, int carStar, int dealerStar) {
@@ -87,19 +83,22 @@ public class MemberReviewDAOImpl implements MemberReviewDAO {
 		return reviewList;
 	}
 
-	@Override
 	public List<Reply> replySelectAll() {
 		
-		String replySql = "select * from reply where re_no= ? order by re_no desc";
+		String replySql = "select * from reply";
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs = null;
 		Reply reply =null;
 		List<Reply> replyList = new ArrayList<Reply>();
 		
+		
+		
 		try {
 			con = DBManager.getConnection();
 			ps = con.prepareStatement(replySql);
+			rs = ps.executeQuery();
+			
 			
 			reply = new Reply(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4));
 			replyList.add(reply);
@@ -115,45 +114,43 @@ public class MemberReviewDAOImpl implements MemberReviewDAO {
 
 	@Override
 	public int reviewDelete(int sessionNum) {
-		int purchaseNum = dDao.purchaseNumFindBySessionNum(sessionNum);
-		 String sql = "delete from review where re_no =?";
-		int result =0;
-		Connection con=null;
-		PreparedStatement ps=null;
-		
-		 
-		 try {
-				 con = DBManager.getConnection();
-				 ps = con.prepareStatement(sql);
-				 
-				 ps.setInt(1, purchaseNum);
-				 
-				 result = ps.executeUpdate();
-				 
-		 }catch(SQLException e) {
-			 
-		 }finally {
-			 DBManager.dbClose(con, ps);
-			 
-		 }
-		return result;
-	}
+		String sql = "delete from review where re_no = ?";
+        int result = 0;
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = DBManager.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, sessionNum);  // 리뷰 번호로 삭제
+            result = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBManager.dbClose(con, ps);
+        }
+        return result;
+    }
 
 	@Override
-	public Review reviewDuplication(int sessionNum) {
+	public Review reviewDuplication() throws Exception{
 		String sql = "select * from review where purchase_no = ?";
 		Review review = null;
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-
+		int memberNo=memberSession.getMemberNo();
 		try {
-			int purchaseNum = dDao.purchaseNumFindBySessionNum(sessionNum);
+			
+		int purchaseNo = dealerReviewDAO.purchaseNumFindByMemberSessionNum(memberNo);
+		
+		
+		
 			con = DBManager.getConnection();
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, purchaseNum);
+			ps.setInt(1, purchaseNo);
 			rs = ps.executeQuery();
-			if(purchaseNum==0) {
+			if(purchaseNo==0) {
 				if (rs.next()) {
 					review = new Review(
 							rs.getInt(1),
@@ -169,7 +166,7 @@ public class MemberReviewDAOImpl implements MemberReviewDAO {
 					
 			}
 			
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBManager.dbClose(con, ps, rs);

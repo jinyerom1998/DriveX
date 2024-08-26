@@ -11,7 +11,7 @@ public interface MemberService {
 	 * @return int =>성공여부
 	 * @throws Exception 
 	 */
-	void memberInsert(String memberId, String name, int age, String address, String password) throws SQLException;
+	void memberInsert(String memberId, String name, int age, String address, String password) throws SQLException, Exception;
 
 	/**
 	 * 로그인

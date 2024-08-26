@@ -9,7 +9,6 @@ import Service.DealerReviewService;
 import Service.DealerReviewServiceImpl;
 import Service.MemberReviewService;
 import Service.MemberReviewServiceImpl;
-import view.ReviewView;
 
 public class ReviewController {
 	static DealerReviewService dealerReviewService = new DealerReviewServiceImpl();
@@ -34,17 +33,6 @@ public class ReviewController {
 		
 	}
 	
-	public static void reviewSelectAll() {
-		List<Review> listReview = new ArrayList<>();
-		
-		listReview = memberReviewService.reviewSelectAll();
-		for(Review re : listReview) {
-			System.out.println(re);
-		}
-		
-		
-		
-	}
 	
 	public static void reviewInsert(int sessionNum, String title,String content,int carStar, int dealerStar) {
 		memberReviewService.reviewInsert(sessionNum, title, content, carStar, dealerStar);
@@ -58,4 +46,14 @@ public class ReviewController {
 			System.out.println("삭제하려는 번호의 리뷰글이 없습니다");
 		}
 	}
+
+
+	public static void reviewSelectAll() {
+		List<Review> listReview = new ArrayList<>();
+		
+		listReview = memberReviewService.reviewSelectAll();
+		for(Review re : listReview) {
+			System.out.println(re);
+		}
+    }
 }

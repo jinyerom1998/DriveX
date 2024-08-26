@@ -19,7 +19,8 @@ public class DealerReviewDAOImpl implements DealerReviewDAO {
 	DealerSession dealerSession = DealerSession.getInstance();
 	
 	MemberReviewDAO memberRiviewDAO = new MemberReviewDAOImpl();
-
+	
+	
 	@Override
 	public List<Review> selectReviewByNum() throws SQLException 
 	{
@@ -136,7 +137,7 @@ public class DealerReviewDAOImpl implements DealerReviewDAO {
 	}
 
 	@Override
-	public int purchaseNumFindByMemberSessionNum() throws Exception 
+	public int purchaseNumFindByMemberSessionNum(int memberNo) throws Exception 
 	{
 		int memberSessionNum = memberSession.getMemberNo();
 		Connection con = null;

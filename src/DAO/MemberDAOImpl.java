@@ -37,9 +37,7 @@ public class MemberDAOImpl implements MemberDAO {
 	    }
 
 	    return result;
-	}
-
-	
+	}	
 	
 	@Override
 	public Member login(String memberId, String password) throws SQLException {//
