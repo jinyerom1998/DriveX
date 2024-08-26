@@ -239,7 +239,7 @@ public class DealerDAOImpl implements DealerDAO {
 
 	@Override
 	public double selectDealerStarByDealerId(String DealerId) throws SQLException {
-
+		DealerSession dealerSession = DealerSession.getInstance();
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs = null;

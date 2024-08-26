@@ -15,7 +15,7 @@ public class Member {
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
-		Name = name;
+		this.Name = name;
 		this.age = age;
 		this.address = address;
 		this.password = password;

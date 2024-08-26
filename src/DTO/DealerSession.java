@@ -55,6 +55,7 @@ public class DealerSession {
 	}
 	
 	public DealerSession(int dealerNo, String dealerName, String dealerId, String dealerPass, String dealerOption, String self, int rate) {
+
 		super();
 		this.dealerNo = dealerNo;
 		this.dealerId = dealerId;

@@ -10,7 +10,7 @@ import view.MemberMenuView;
 public class LoginController {
 	static MemberService memberService = new MemberServiceImpl();
 	static DealerService dealerService = new DealerServiceImpl();
-	
+
 	
 	public static void login(String memberId, String password) {
 		try {
@@ -23,6 +23,7 @@ public class LoginController {
 			}
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
+
 		}
 	}
 }

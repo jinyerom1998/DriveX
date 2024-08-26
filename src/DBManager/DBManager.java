@@ -19,7 +19,9 @@ public class DBManager {
 		  Class.forName(DBProperties.DRVIER_NAME);
 		}catch (ClassNotFoundException e) {
 			e.printStackTrace();
+			
 		}
+		
 	}
 	
 	/**

@@ -17,14 +17,17 @@ public class MenuView {
 			int menu = Integer.parseInt(sc.nextLine());
 			switch(menu) {
 			case 1 :
-				MenuView.register(); // 가입
+				MenuView.register(); // 회원가입
 				break;
+				
 			case 2 :
 				MenuView.login();// 로그인
 				break;
+
 			case 9 : 
 				System.out.println("안녕히 가십시오 - DriveX");
 				System.exit(0);
+			
 			default:
 				System.out.println("1, 2, 9 중에서만 입력 바랍니다.");
 			}
