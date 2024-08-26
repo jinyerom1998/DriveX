@@ -8,10 +8,11 @@ import Service.DealerReviewService;
 import Service.DealerReviewServiceImpl;
 import Service.MemberReviewService;
 import Service.MemberReviewServiceImpl;
+import view.ReviewView;
 
 public class ReviewController {
 	static DealerReviewService dealerReviewService = new DealerReviewServiceImpl();
-	static MemberReviewService memberReviewService = new MemberReviewServiceImpl();
+	static MemberReviewService memberReviewService = MemberReviewServiceImpl.getInstance();
 	
 	public static void findBySessionNum(int sessionNum) {
 		int result=0;
@@ -20,7 +21,7 @@ public class ReviewController {
 		result = dealerReviewService.findBySessionNum(sessionNum);
 		
 		if(result==0) {
-			throw new Exception();
+			//throw new Exception();
 		}
 		
 	}
@@ -29,12 +30,16 @@ public class ReviewController {
 		List<Review> listReview = new ArrayList<>();
 		
 		listReview = memberReviewService.reviewSelectAll();
+		for(Review re : listReview) {
+			System.out.println(re);
+		}
 		
-		if(listReview.size()==0) {
+		
+		/*if(listReview.isEmpty()) {
 			//등록된 리뷰가 없습니다 예외 발생
 		}else {
-			//등록된 리뷰 출력 뷰 호출
-		}
+			ReviewView.reviewSelectAll();
+		}*/
 	}
 	
 	public static void reviewInsert(int sessionNum, String title,String content,int carStar, int dealerStar) {

@@ -24,7 +24,7 @@ public class Review {
 	
 	
 	public Review(int reviewNo, int purchaseNo, String reviewTitle, String reviewContent, int carStar, int dealerStar,
-			String reviewDate, List<Reply> replyList) {
+			String reviewDate) {
 		super();
 		this.reviewNo = reviewNo;
 		this.purchaseNo = purchaseNo;
@@ -33,8 +33,9 @@ public class Review {
 		this.carStar = carStar;
 		this.dealerStar = dealerStar;
 		this.reviewDate = reviewDate;
-		this.replyList = replyList;
 	}
+	
+	
 	public int getReviewNo() {
 		return reviewNo;
 	}

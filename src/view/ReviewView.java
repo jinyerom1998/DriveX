@@ -2,6 +2,8 @@ package view;
 
 import java.util.Scanner;
 
+import DTO.Review;
+import app.mvc.dto.ReplyDTO;
 import controller.ReviewController;
 
 public class ReviewView {
@@ -68,5 +70,14 @@ public class ReviewView {
 		int reNo = Integer.parseInt(sc.nextLine());
 		//컨트롤러의 삭제함수 호출(인수: reNo)
 		ReviewController.reviewDelete(reNo);
+	}
+	
+	public static void reviewSelectAll(Review review) {
+		System.out.println(review);
+		
+		System.out.println("댓글 개수 : " + Review.getRepliesList().size() +"개 ---------");
+		for(Review reply : Review.getRepliesList()) {
+			System.out.println("       ▶ " + reply );
+		}
 	}
 }

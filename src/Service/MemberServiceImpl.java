@@ -2,7 +2,12 @@ package Service;
 
 import java.lang.reflect.Member;
 
+import DAO.MemberDAO;
+import DAO.MemberDAOImpl;
+
 public class MemberServiceImpl implements MemberService {
+	MemberDAO memberDAO = new MemberDAOImpl();
+
 
 	@Override
 	public void memberInsert(String memberId, String name, int age, String address, String password) {
@@ -12,9 +17,15 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member login(String memberId, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		   Member member = memberDAO.login(memberId , password);
+		   
+		   if (member == null) {
+		        //Exception
+		    }
+		   
+		   return member;
+		   }
+
 
 	@Override
 	public Member selectMemberById(String memberId) {
