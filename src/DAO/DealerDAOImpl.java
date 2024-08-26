@@ -13,7 +13,7 @@ import DTO.Dealer;
 import DTO.DealerSession;
 
 public class DealerDAOImpl implements DealerDAO {
-
+	DealerReviewDAO dealerReviewDAO = new DealerReviewDAOImpl();
 	@Override
 	public int login(String dealerId, String password) throws SQLException {
 		
@@ -236,32 +236,43 @@ public class DealerDAOImpl implements DealerDAO {
 		
 		return car;
 	}
-
+	
+	
+	
+	
+	
 	@Override
-	public double selectDealerStarByDealerId(String DealerId) throws SQLException {
+	public double selectDealerStarByDealerId() throws Exception {
 		DealerSession dealerSession = DealerSession.getInstance();
+		String DealerId = dealerSession.getDealerId();
+		int sessionNum = dealerNumFindByDealerId(DealerId);
+		
+		int purchaseNum = dealerReviewDAO.purchaseNumFindByDealerSessionNum(sessionNum);
+		
+		
+		
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs = null;
 		double result = 0;
+		int dealStar = 0;
+		String sql = "SELECT ROUND(AVG(DEAL_STAR),2) FROM REVIEW WHERE PURCHASE_NO = ?";
 		try {
 			con = DBManager.getConnection();
-			ps= con.prepareStatement("");
-			ps.setString(1, DealerId);
-				
-			ps.executeQuery();
+			ps= con.prepareStatement(sql);
+			ps.setInt(1, purchaseNum);
 			
-			int cnt=0;
-			int sum=0;
-			while(rs.next()) {
-				cnt++;
-				sum+=rs.getInt(1);
+			rs = ps.executeQuery();
+			if(rs.next())
+			{
+			dealStar = rs.getInt(1);
 			}
-			result = sum/cnt;
+			
+			result = dealStar;
 		}finally {
 			DBManager.dbClose(con, ps, rs);
 		}
-		
+		System.out.println("딜러평점: "+result);
 		return result;
 	}
 	
@@ -288,5 +299,35 @@ public class DealerDAOImpl implements DealerDAO {
 		
 		return listDealer;
 	}
+
+	@Override
+	public int dealerNumFindByDealerId(String sessionId) throws SQLException 
+	{
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int sessionNum = 0;
+		String sql = "SELECT DEALER_NO FROM DEALER WHERE DEALER_ID = ?";
+		
+		try 
+		{
+			con = DBManager.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, sessionId);
+			rs = ps.executeQuery();
+			
+			if(rs.next())
+			{
+			sessionNum = rs.getInt(1);
+			}
+		}
+		finally
+		{
+			DBManager.dbClose(con, ps, rs);
+		}
+		
+		return sessionNum;
+	}
+
 
 }

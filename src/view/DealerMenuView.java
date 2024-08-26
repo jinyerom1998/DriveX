@@ -29,7 +29,7 @@ public class DealerMenuView {
 				 DealerReviewView.menu();// 후기게시판
 				break;
 			case 3 :
-				DealerController.selectDealerStarByDealerId(dealerSession.getDealerId());//컨트롤러.실적조회함수 호출
+				DealerController.selectDealerStarByDealerId();//컨트롤러.실적조회함수 호출
 				break;
 			case 4 :
 				DealerMenuView.selfUpdate();//딜러정보수정

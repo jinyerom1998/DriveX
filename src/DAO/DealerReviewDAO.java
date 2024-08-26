@@ -55,4 +55,5 @@ public interface DealerReviewDAO
 	 * 있다면 이셉션 날려도됨.  
 	 */
 	int replyDuplication(int sessionNum)throws Exception;
+	
 }

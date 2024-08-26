@@ -3,7 +3,7 @@ package view;
 import java.util.Scanner;
 
 import DTO.DealerSession;
-import controller.DealerController;
+import controller.ReviewController;
 
 public class DealerReviewView {
 	static Scanner sc = new Scanner(System.in);
@@ -23,7 +23,7 @@ public class DealerReviewView {
 			int menu = Integer.parseInt(sc.nextLine());
 			switch(menu) {
 			case 1 :
-				DealerController.reviewSelectAll(dealerSession.getDealerNo()); //컨트롤러의 조회함수 호출 //조회
+				ReviewController.reviewSelectAll(); //컨트롤러의 조회함수 호출 //조회
 				break;
 			case 2 :
 				DealerReviewView.registerReply();//답글달기
