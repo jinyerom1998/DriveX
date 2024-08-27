@@ -52,6 +52,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 		purchaseDAO.purchaseInsert(carNo, dealerNum, color, sunRoof, coolSeat, aroundView, totalPrice);
 	}
 
+	//잔고가 충분한지 확인
 	@Override
 	public boolean checkAndHandleBalance(int totalPrice) throws SQLException {
 		int memberNo = MemberSession.getInstance().getMemberNo();
@@ -59,6 +60,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 		return currentBalance >= totalPrice;
 	}
 
+	//로그인한
 	@Override
 	public int getBalance() throws SQLException {
 		int memberNo = MemberSession.getInstance().getMemberNo();

@@ -191,7 +191,7 @@ public class PurchaseDAOImpl implements PurchaseDAO
 		return carNo;
 	}
 
-	@Override//수정 필요!! 구매번호?
+	@Override
 	public int purchaseInsert(String carNo, int dealerNum, String color, int sunRoof, int coolSeat, int aroundView, int totalPrice) throws SQLException {
 		String query = "INSERT INTO Purchase (purchase_no,member_no,sunroof, seat, around_view, color, purchase_date, price, dealer_no,car_no) " +
 				"VALUES (purchase_no_seq.NEXTVAL,?, ?, ?, ?, ?,sysdate,?, ?, ?)";
@@ -332,6 +332,7 @@ public class PurchaseDAOImpl implements PurchaseDAO
 		return optionPrice;
 	}
 
+	//구매하면 balance가 줄고 충전하면 -값이 들어와서 balance가 늘어나는 원리
 	@Override
 	public int updateMemberBalance(int memberNo, int amount) throws SQLException
 	{
@@ -360,6 +361,7 @@ public class PurchaseDAOImpl implements PurchaseDAO
 		}
 	}
 
+	//차량 구매하면 수량 감소
 	@Override
 	public int updateCarQuantity(String carNo, int amount) throws SQLException
 	{

@@ -21,6 +21,7 @@ public class MemberMenuView {
 			switch(menu) {
 			case 1 :
 				//컨트롤러.purchase(); // 구매
+				PurchaseController.startPurchase();
 				break;
 			case 2 :
 				FAQView.printFAQ(); // FAQ 출력
