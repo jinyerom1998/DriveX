@@ -52,7 +52,7 @@ public interface PurchaseService {
 	 * @param aroundView 어라운드 뷰 옵션
 	 * @return 총 가격
 	 */
-	int calculateTotalPrice(String carNo, String color, int sunRoof, int coolSeat, int aroundView) throws SQLException;
+	int calculateTotalPrice(String carNo, int sunRoof, int coolSeat, int aroundView) throws SQLException;
 
 	/**
 	 * 잔액 확인 및 부족한 경우 처리하는 함수

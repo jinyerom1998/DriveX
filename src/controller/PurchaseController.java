@@ -60,7 +60,7 @@ public class PurchaseController {
 			int aroundView = PurchaseView.chooseAroundViewOption();
 
 			// 6. 총 비용 계산
-			int totalPrice = purchaseService.calculateTotalPrice(carNo, selectedColor, sunRoof, coolSeat, aroundView);
+			int totalPrice = purchaseService.calculateTotalPrice(carNo,sunRoof, coolSeat, aroundView);
 			PurchaseView.displayTotalPrice(totalPrice);
 
 			// 7. 구매 과정 처리
