@@ -36,6 +36,7 @@ public class DealerMenuView {
 				break;
 			case 5 : 
 				System.out.println("안녕히 가십시오 - DriveX");
+				dealerSession = null;
 				return;
 			default:
 				System.out.println("1, 2, 3, 4, 5 중에서만 입력 바랍니다.");

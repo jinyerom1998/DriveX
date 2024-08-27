@@ -37,7 +37,7 @@ public class QuantityView {
 
 	public static void printMenu() {
 		System.out.println("=== DriveX Dealer 재고관리 ===");
-		System.out.print("1. 수정   |   2. 조회   |  3. 나가기");
+		System.out.println("1. 수정   |   2. 조회   |  3. 나가기");
 	}
 	
 	public static void updateQuantity() {

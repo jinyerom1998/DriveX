@@ -102,7 +102,6 @@ public class DealerReviewDAOImpl implements DealerReviewDAO {
 			DBManager.dbClose(null, ps, rs);
 
 		}
-
 	}
 
 	@Override
