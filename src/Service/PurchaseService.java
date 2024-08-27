@@ -20,7 +20,7 @@ public interface PurchaseService {
 	 * 구매 완료 시 호출되어야 할 DAO:
 	 *  purchaseDAO에서 insert시킴
 	 */
-	void purchaseInsert(String carNo,int dealerNum, String color, int sunRoof, int coolSeat, int aroundView, int totalPrice) throws SQLException;
+	void purchaseInsert(int carNo,int dealerNum, String color, int sunRoof, int coolSeat, int aroundView, int totalPrice) throws SQLException;
 
 	// ---------------- 추가된 부분 ----------------
 
@@ -41,18 +41,17 @@ public interface PurchaseService {
 	 * @param carName 선택한 차량의 이름
 	 * @return 차량 번호
 	 */
-	String getCarNoByCarName(String carName) throws SQLException;
+	int getCarNoByCarName(String carName) throws SQLException;
 
 	/**
 	 * 총 가격 계산을 위한 함수
 	 * @param carNo 차량 번호
-	 * @param color 선택한 색상
 	 * @param sunRoof 썬루프 옵션
 	 * @param coolSeat 냉각 시트 옵션
 	 * @param aroundView 어라운드 뷰 옵션
 	 * @return 총 가격
 	 */
-	int calculateTotalPrice(String carNo, int sunRoof, int coolSeat, int aroundView) throws SQLException;
+	int calculateTotalPrice(int carNo, int sunRoof, int coolSeat, int aroundView) throws SQLException;
 
 	/**
 	 * 잔액 확인 및 부족한 경우 처리하는 함수

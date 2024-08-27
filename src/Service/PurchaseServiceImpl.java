@@ -92,7 +92,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 
 	@Override
-	public String getCarNoByCarName(String carName) throws SQLException
+	public int getCarNoByCarName(String carName) throws SQLException
 	{
 		return purchaseDAO.getCarNoByCarName(carName);
 	}
