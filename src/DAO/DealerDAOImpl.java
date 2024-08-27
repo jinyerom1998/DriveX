@@ -85,7 +85,7 @@ public class DealerDAOImpl implements DealerDAO {
 
 	@Override
 	public int carQuantityPlusUpdate(Car car, int amount) throws SQLException {
-		System.out.println("ddddd");
+		//System.out.println("확인1");
 		
 		DealerSession dealerSession = DealerSession.getInstance();
 		int result = 0;
@@ -95,7 +95,7 @@ public class DealerDAOImpl implements DealerDAO {
 		String sql = "update car set quantity=quantity+? where car_name=?";
 		
 		try {
-			System.out.println("eeeeeee");
+			//System.out.println("확인2");
 			con = DBManager.getConnection();
 			ps= con.prepareStatement(sql);
 			
@@ -105,7 +105,7 @@ public class DealerDAOImpl implements DealerDAO {
 			
 				
 			result = ps.executeUpdate();
-			System.out.println("result: "+result);
+			//System.out.println("확인3");
 		}finally {
 			DBManager.dbClose(con, ps);
 		}

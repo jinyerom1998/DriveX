@@ -3,6 +3,7 @@ package DAO;
 import java.sql.SQLException;
 import java.util.List;
 
+import DTO.Car;
 import DTO.Dealer;
 
 public interface PurchaseDAO {
@@ -16,6 +17,9 @@ public interface PurchaseDAO {
 
 	//DealerDAO에더 같은 함수 있음
 	List<Dealer> getAllDealers() throws SQLException;
+
+	//Car테이블에 있는 모든 차들을 가지고 옴
+	public List<Car> getCarList() throws SQLException;
 
 	/**
 	 * 순서) 2번. SUV vs Sedan 고르기할 때

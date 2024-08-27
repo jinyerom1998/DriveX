@@ -9,6 +9,7 @@ import DAO.MemberDAO;
 import DAO.MemberDAOImpl;
 import DAO.PurchaseDAO;
 import DAO.PurchaseDAOImpl;
+import DTO.Car;
 import DTO.Dealer;
 import DTO.MemberSession;
 
@@ -95,11 +96,18 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 
 	@Override
-	public int calculateTotalPrice(String carNo, String color, int sunRoof, int coolSeat, int aroundView) throws SQLException {
+	public int calculateTotalPrice(String carNo, int sunRoof, int coolSeat, int aroundView) throws SQLException {
 		int basePrice=purchaseDAO.getBasePriceByCarNo(carNo);
 		int sunRoofPrice=sunRoof==1 ? purchaseDAO.getSunRoofPrice() : 0; // 썬루프가 선택된 경우에만 디비에서 정보 불러와
 		int coolSeatPrice=coolSeat==1 ? purchaseDAO.getCoolSeatPrice() : 0;
 		int aroundViewPrice=aroundView==1 ? purchaseDAO.getAroundViewPrice() : 0;
 		return basePrice+sunRoofPrice+coolSeatPrice+aroundViewPrice;
+	}
+
+	//모든 종류의 차들을 가지고 옴
+	@Override
+	public List<Car> getCarList() throws SQLException
+	{
+		return purchaseDAO.getCarList();
 	}
 }
