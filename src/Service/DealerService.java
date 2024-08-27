@@ -94,10 +94,10 @@ public interface DealerService
 	 
 	 /**
 	  * 딜러평점조회
-	  * @param DealerId => 세션에서 현재 로그인되있는 딜러의 ID
 	  * @return double => 'AVG 딜러평점' 해서 나온 값
 	 * @throws SQLException 
+	 * @throws Exception 
 	  */
-	 double selectDealerStarByDealerId(String DealerId) throws SQLException;
+	 double selectDealerStarByDealerId() throws SQLException, Exception;
 	 
 }

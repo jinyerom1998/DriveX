@@ -8,35 +8,15 @@ public interface PurchaseService {
 
 	/**
 	 * 순서) 1번. 딜러 선택하기일 때
-	 * Dealer를 고를 때 보여주는 Dealer 자기소개
+	 * Dealer를 고를 때 보여주는 Dealer의 번호와 자기소개
 	 * @return List<Dealer>
 	 */
-	List<Dealer> DealerChoice();
-
-	/**
-	 * 순서) 6번.
-	 * purchase 객체에다가 현재 인수들 넣어줌
-	 * total 견적서를 띄워주고 구매 번호랑 회원 번호만 빼고 보여줌
-	 * 그 다음에 1) 구매하기 - 잔액이 다 있을 경우 순서 8번)으로 바로 감
-	 *                     - 잔액이 없을 경우 순서 7번) - 순서 8번 순으로 진행
-	 * 2) 나가기
-	 * 그리고 여기서 견적서를 테이블에 입력한다
-	 */
-	//void preparePurchase(String carNo, int dealerNum, String color, int sunRoof, int coolSeat, int aroundView, int totalPrice);
-
-	/**
-	 * 순서) 7번.
-	 *
-	 * 잔액이 얼마 남았는지 보여주고 부족할 경우 예외 처리로 잔고 관리(충전 메뉴)로 들어감
-	 * 전 단계인 6단계의 상태와 똑같이 견적서를 갖고 있는 상황으로 만들어줌
-	 * 잔액 부족으로 충전하러 갔을 때 메소드에서 호출
-	 */
+	List<Dealer> DealerChoice() throws SQLException;
 
 	/**
 	 * 순서) 8번.
 	 * 구매 완료 시 호출되어야 할 DAO:
-	 *  MemberDAO.balanceMinusUpdate를 호출하는데 인수로 purchase.getTotalPrice 값을 주는 메소드 생성.
-	 *  DealerDAO.carQuantityMinusUpdate를 호출.
+	 *  purchaseDAO에서 insert시킴
 	 */
 	void purchaseInsert(String carNo,int dealerNum, String color, int sunRoof, int coolSeat, int aroundView, int totalPrice) throws SQLException;
 

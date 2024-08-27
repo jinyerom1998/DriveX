@@ -29,6 +29,9 @@ public interface DealerReviewService
 	 * 리뷰의 리뷰번호를 갖고 Insert한다. 
 	 */
 	void replyInsert(int reviewNum,String content)throws SQLException;
+
+
+
 	
 
 }

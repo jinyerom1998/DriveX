@@ -69,9 +69,12 @@ public class DealerServiceImpl implements DealerService {
 	}
 
 	@Override
-	public double selectDealerStarByDealerId(String DealerId) throws SQLException {
-		double result = dealerDAO.selectDealerStarByDealerId(DealerId);
+	public double selectDealerStarByDealerId() throws Exception {
+		
+		double result = dealerDAO.selectDealerStarByDealerId();
 		return result;
 	}
+
+	
 
 }

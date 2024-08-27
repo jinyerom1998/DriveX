@@ -18,9 +18,14 @@ public class DealerReviewDAOImpl implements DealerReviewDAO {
 	MemberSession memberSession = MemberSession.getInstance();
 	DealerSession dealerSession = DealerSession.getInstance();
 	
+<<<<<<< HEAD
 	MemberReviewDAO memberRiviewDAO = new MemberReviewDAOImpl();
 	
 	
+=======
+	MemberReviewDAO memberRiviewDAO = MemberReviewDAOImpl.getInstance();
+
+>>>>>>> 3d212ffee6449d9dd255f37f373e1cb6a1a9201e
 	@Override
 	public List<Review> selectReviewByNum() throws SQLException 
 	{
@@ -103,7 +108,6 @@ public class DealerReviewDAOImpl implements DealerReviewDAO {
 	@Override
 	public int purchaseNumFindByDealerSessionNum(int sessionNum) throws SQLException 
 	{
-		
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -117,6 +121,7 @@ public class DealerReviewDAOImpl implements DealerReviewDAO {
 				ps.setInt(1, sessionNum);
 				rs = ps.executeQuery();
 				
+
 				if (rs.next()) {
 				purchaseNum = rs.getInt(1);
 
@@ -125,19 +130,18 @@ public class DealerReviewDAOImpl implements DealerReviewDAO {
 
 				} else {
 					return purchaseNum;
-				}
 
 			}
-			return 0;
+				}
 		}
-
 		finally {
 			DBManager.dbClose(con, ps, rs);
 		}
-
+		return 0;
+		
 	}
 
-	
+
 
 	@Override
 	public int replyInsert(int reviewNo,String content) throws SQLException

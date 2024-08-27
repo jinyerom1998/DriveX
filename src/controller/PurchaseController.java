@@ -6,10 +6,13 @@ import java.util.List;
 import DTO.Dealer;
 import Service.PurchaseService;
 import Service.PurchaseServiceImpl;
+import com.sun.tools.javac.Main;
+import view.MemberMenuView;
+import view.MenuView;
 import view.PurchaseView;
 
 public class PurchaseController {
-	// 싱글톤으로 사용될 서비스 인스턴스
+	// 딜러리뷰서비스에서 사용?
 //	static DealerReviewService dealerReviewService = DealerReviewServiceImpl.getInstance();
 //
 //	public static void findBySessionNum(int sessionNum) {
@@ -23,25 +26,26 @@ public class PurchaseController {
 //	}
 
 	/**
-	 * 구매 프로세스를 시작하는 메서드
+	 * 구매 프로세스를 시작
 	 */
 	public static void startPurchase() {
 		try {
 			PurchaseService purchaseService = PurchaseServiceImpl.getInstance(); // 싱글톤 인스턴스 사용?
 
 			// 1. 딜러 선택하기
-			List<Dealer> dealers = purchaseService.DealerChoice();
+			List<Dealer> dealers = purchaseService.DealerChoice();//모든 딜러 정보들을 가지고 옴
 			Dealer selectedDealer = PurchaseView.displayDealersAndSelect(dealers);
 
-			// 2. 차량 타입 및 모델 선택
+			// 2. 차량 타입(카테고리) 및 모델 선택
 			int carTypeChoice = PurchaseView.chooseCarType();
 			List<String> carList = (carTypeChoice == 1) ? purchaseService.getCarListByType("SUV") : purchaseService.getCarListByType("Sedan");
+			// 1을 고르면 suv 목록을 얻고 나머지 경우에서는 sedan의 정보를 얻음
 			String selectedCarName = PurchaseView.displayCarsAndSelect(carList);
 
-			// 3. 차량 번호 선택
+			// 3. 차량 번호 선택, 차량의 이름을 이용하여 carNo를 얻음
 			String carNo = purchaseService.getCarNoByCarName(selectedCarName);
 
-			// 4. 색상 선택
+			// 4. 색상 선택, 변수에 저장
 			String selectedColor = PurchaseView.chooseColor();
 
 			// 5. 옵션 선택
@@ -76,24 +80,26 @@ public class PurchaseController {
 						{ // 충전했는데도 잔액이 부족하다면 주문 취소
 							PurchaseView.displayInSufficientBalance();
 							PurchaseView.displayPurchaseCancelled();
-							return; // 상위 메뉴로 올라감
+							MemberMenuView.menu(); // 상위 메뉴로 올라감
 						}
 					}
 					else
 					{ // 충전하지 않는 경우 주문 취소
 						PurchaseView.displayPurchaseCancelled();
-						return;
+						MemberMenuView.menu(); // 상위 메뉴 or 메인메뉴로
 					}
 				}
 				else
 				{ // 잔고가 충분한 경우
 					finalizePurchase(carNo, selectedDealer.getDealerNo(), selectedColor, sunRoof, coolSeat, aroundView, totalPrice);
 					PurchaseView.displayPurchaseSuccess();
+					MemberMenuView.menu();//구매가 끝나도 메인 화면으로
 				}
 			}
 			else
 			{ // 구매를 취소하는 경우
 				PurchaseView.displayPurchaseCancelled();
+				MemberMenuView.menu(); // 상위 메뉴 or 메인메뉴로
 			}
 
 		} catch (SQLException e) {

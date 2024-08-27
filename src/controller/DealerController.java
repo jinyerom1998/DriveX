@@ -14,7 +14,7 @@ import Service.MemberReviewServiceImpl;
 
 public class DealerController {
 	static DealerService dealerService = new DealerServiceImpl();
-	static MemberReviewService memberReviewService = new MemberReviewServiceImpl();
+	static MemberReviewService memberReviewService = MemberReviewServiceImpl.getInstance();
 	static DealerReviewService dealerReviewService = new DealerReviewServiceImpl();
 	
 	public static void carQuantityPlusUpdate(String carName,int amount) {
@@ -55,15 +55,13 @@ public class DealerController {
 		}
 	}
 	
-	public static void reviewSelectAll(int sessionNum) {
-		dealerReviewService.replyDuplication(sessionNum);
+	
+	public static double selectDealerStarByDealerId() {
 		
-	}
-	public static double selectDealerStarByDealerId(String DealerId) {
 		double result = 0;
 		try {
-			result = dealerService.selectDealerStarByDealerId(DealerId);
-		} catch (SQLException e) {
+			result = dealerService.selectDealerStarByDealerId();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
