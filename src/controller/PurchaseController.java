@@ -39,8 +39,8 @@ public class PurchaseController {
 
 			// 2. 차량 타입(카테고리) 및 모델 선택
 			//모든 타입의 차량 조회
-			List<Car> getAllcars=purchaseService.getCarList();
-			PurchaseView.displayAllCars(getAllcars);
+			List<Car> getAllCars=purchaseService.getCarList();
+			PurchaseView.displayAllCars(getAllCars);
 
 			//차량 카테고리를 선택
 			int carTypeChoice = PurchaseView.chooseCarType();
