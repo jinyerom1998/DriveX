@@ -11,8 +11,7 @@ public class DealerReviewView {
 	public static void menu() {
 		while(true) {
 			
-			System.out.println("딜러의 아이디와 딜러의 평점을 세션으로 출력하는 곳");
-
+			//딜러의 아이디와 딜러의 평점을 세션으로 출력하는 곳
 			DealerSession dealerSession = DealerSession.getInstance();
 			
 			System.out.println("딜러ID: "+dealerSession.getDealerId()+" | 딜러평점: "+dealerSession.getRate());

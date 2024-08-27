@@ -19,11 +19,11 @@ public class DealerController {
 	
 	public static void carQuantityPlusUpdate(String carName,int amount) {
 		Car car=null;
-		System.out.println("자살각");
+		//System.out.println("확인4");
 		try {
 			
 			car = dealerService.carSelectByCarName(carName);
-			System.out.println("여긴가");
+			//System.out.println("확인5");
 			dealerService.carQuantityPlusUpdate(car, amount);
 		} catch (SQLException e) {
 			e.printStackTrace();

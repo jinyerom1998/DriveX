@@ -58,4 +58,6 @@ public class ReviewController {
 			System.out.println("삭제하려는 번호의 리뷰글이 없습니다");
 		}
 	}
+	
+	public 
 }
