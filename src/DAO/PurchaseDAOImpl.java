@@ -7,10 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import DBManager.DBManager;
 import DTO.Car;
 import DTO.Dealer;
 import DTO.MemberSession;
-import DBManager.DBManager;
+import DTO.Purchase;
 
 public class PurchaseDAOImpl implements PurchaseDAO
 {
@@ -32,7 +33,7 @@ public class PurchaseDAOImpl implements PurchaseDAO
 	public List<Dealer> getAllDealers() throws SQLException
 	{
 		List<Dealer> dealers = new ArrayList<>();
-		String query = "SELECT dealer_no, dealer_id, self, rate FROM Dealer";
+		String query = "SELECT dealer_name,dealer_no, dealer_id, self, rate FROM Dealer";
 
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -47,7 +48,8 @@ public class PurchaseDAOImpl implements PurchaseDAO
 			while (rs.next())
 			{
 				Dealer dealer = new Dealer();
-				dealer.setDealerNo(rs.getInt("dealer_no"));
+				dealer.setDealerName(rs.getString("dealer_name"));
+				dealer.setDealerNo(rs.getInt("dealer_no")	);
 				dealer.setDealerId(rs.getString("dealer_id"));
 				dealer.setSelf(rs.getString("self"));
 				dealer.setRate(rs.getInt("rate"));
@@ -115,7 +117,7 @@ public class PurchaseDAOImpl implements PurchaseDAO
 	@Override
 	public List<Car> getCarList() throws SQLException {
 		List<Car> carList = new ArrayList<>();
-		String query = "SELECT car_name, drive, horse_power, quantity, price, category FROM Car";
+		String query = "SELECT car_name, drive,fuel ,horse_power, quantity, price, category FROM Car";
 
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -128,8 +130,10 @@ public class PurchaseDAOImpl implements PurchaseDAO
 
 			while (rs.next()) {
 				Car car = new Car();
+				//carNo는 구매자가 알 필요가 없어서 제외
 				car.setCarName(rs.getString("car_name"));
 				car.setDrive(rs.getString("drive"));// 구동 방식
+				car.setFuel(rs.getString("fuel")); //연비
 				car.setHorsePower(rs.getString("horse_power"));// 마력
 				car.setQuantity(rs.getInt("quantity"));// 재고량
 				car.setPrice(rs.getInt("price"));// 가격
@@ -207,7 +211,7 @@ public class PurchaseDAOImpl implements PurchaseDAO
 			// 세션에서 member_no 가져오기
 			int sessionNum = MemberSession.getInstance().getMemberNo();
 
-			ps.setInt(1, sessionNum);
+			ps.setInt(1, sessionNum);//memberNo
 			ps.setInt(2, sunRoof);
 			ps.setInt(3, coolSeat);
 			ps.setInt(4, aroundView);
@@ -427,4 +431,47 @@ public class PurchaseDAOImpl implements PurchaseDAO
 		}
 		return 0;
 	}
+	
+	@Override
+	public Purchase allPurchase() throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM purchase where member_no = ?";
+		Purchase purchase = null;
+	
+		int sessionNum = MemberSession.getInstance().getMemberNo();
+		System.out.println("세선넘버 : "+sessionNum);
+		
+		try {
+			con = DBManager.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, sessionNum);
+			rs = ps.executeQuery();
+			while(rs.next()) { 
+				purchase = new Purchase(
+				rs.getInt(1),
+				rs.getInt(2),
+				rs.getInt(3),
+				rs.getInt(4),
+				rs.getInt(5),
+				rs.getString(6),
+				rs.getString(7),
+				rs.getInt(8),
+				rs.getInt(9),
+				rs.getString(10));
+				}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+	} finally {
+		DBManager.dbClose(con, ps, rs);
+	}
+	
+		return purchase;
+	}
+
+
+
+	
 }

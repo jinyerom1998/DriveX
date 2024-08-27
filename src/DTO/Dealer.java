@@ -75,6 +75,10 @@ public class Dealer {
 		this.rate = rate;
 	}
 
+	public void setDealerName(String dealerName) {
+		this.dealerName = dealerName;
+	}
+
 	
 	
 	

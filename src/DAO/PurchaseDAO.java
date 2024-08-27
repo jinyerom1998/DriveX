@@ -5,6 +5,7 @@ import java.util.List;
 
 import DTO.Car;
 import DTO.Dealer;
+import DTO.Purchase;
 
 public interface PurchaseDAO {
 
@@ -115,4 +116,9 @@ public interface PurchaseDAO {
 
 	// 회원 잔고 조회
 	int getBalanceBySessionId(int memberNo) throws SQLException;
+	
+	// 구매 내역 조회
+
+	
+	Purchase allPurchase() throws SQLException;
 }

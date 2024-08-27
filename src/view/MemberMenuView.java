@@ -2,16 +2,21 @@ package view;
 
 import java.util.Scanner;
 
+import DTO.MemberSession;
 import controller.PurchaseController;
 
 public class MemberMenuView {
 	
 	static Scanner sc = new Scanner(System.in);
+	static MemberSession Session =  MemberSession.getInstance();
 	
 	public static void menu() {
 		while(true) {
-			
-			System.out.println();
+
+			System.out.println("─────────────────────────────────────────────");
+			System.out.println("현재 접속중인 아이디 : "+Session.getMemberId());
+			System.out.println("현재 보유중인 잔액 : "+Session.getBalance());
+			System.out.println("─────────────────────────────────────────────");
 			
 			MemberMenuView.printMenu();
 			
@@ -28,7 +33,7 @@ public class MemberMenuView {
 				ReviewView.menu(); //후기게시판
 				break;
 			case 4 :
-				PurchaseController.startPurchase();//컨트롤러.구매내역조회함수 호출
+				PurchaseController.allPurchase(); //컨트롤러.구매내역조회함수 호출
 				break;
 			case 5 :
 				BalanceView.menu();

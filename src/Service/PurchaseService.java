@@ -5,6 +5,7 @@ import java.util.List;
 
 import DTO.Car;
 import DTO.Dealer;
+import DTO.Purchase;
 
 public interface PurchaseService {
 
@@ -72,4 +73,10 @@ public interface PurchaseService {
 	 * @param rechargeAmount 충전할 금액
 	 */
 	void rechargeBalance(int rechargeAmount) throws SQLException;
+	
+	/**
+	 * 사용자의 구매내역을 반환하는 메소드
+	 */
+	Purchase allPurchase() throws SQLException;
+	
 }

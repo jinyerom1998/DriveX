@@ -12,6 +12,7 @@ import DAO.PurchaseDAOImpl;
 import DTO.Car;
 import DTO.Dealer;
 import DTO.MemberSession;
+import DTO.Purchase;
 
 public class PurchaseServiceImpl implements PurchaseService {
 
@@ -112,4 +113,11 @@ public class PurchaseServiceImpl implements PurchaseService {
 	{
 		return purchaseDAO.getCarList();
 	}
+	
+	// 구매 내역 조회
+	public Purchase allPurchase() throws SQLException {		
+		return purchaseDAO.allPurchase();
+	}
+
+
 }

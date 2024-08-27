@@ -53,8 +53,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void balancePlusUpdate(String memberId, int Amount) throws SQLException {
+	public void balancePlusUpdate(String memberId, int Amount) throws Exception {
 		memberDAO.balancePlusUpdate(memberId, Amount);
+		
+		if(Amount < 0) {
+			throw new Exception("터무니 없는 금액입니다.");
+		
+		}
 
 	}
 

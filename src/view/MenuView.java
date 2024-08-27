@@ -37,24 +37,25 @@ public class MenuView {
 	public static void printMenu() {
 		System.out.println("=== DriveX ===");
 		System.out.println("1. 회원가입   |   2. 로그인   |  9. 종료");
+		System.out.print("입력 : ");
 	}
 	
 	public static void register() {
 		System.out.println("회원가입화면입니다");
 		
-		System.out.println("회원아이디를 입력해주세요");
+		System.out.print("회원아이디를 입력해주세요 : ");
 		String memberId = sc.nextLine();		
 		
-		System.out.println("회원 비밀번호를 입력해주세요");
+		System.out.print("회원 비밀번호를 입력해주세요 : ");
 		String password = sc.nextLine();
 		
-		System.out.println("회원 이름을 입력해주세요");
+		System.out.print("회원 이름을 입력해주세요 : ");
 		String name = sc.nextLine();		
 		
-		System.out.println("회원 나이를 입력해주세요");
+		System.out.print("회원 나이를 입력해주세요 : ");
 		int age = Integer.parseInt(sc.nextLine());
 		
-		System.out.println("회원 주소를 입력해주세요");
+		System.out.print("회원 주소를 입력해주세요 : ");
 		String address = sc.nextLine();		
 		
 		//컨트롤러의register함수호출

@@ -5,6 +5,7 @@ import java.util.List;
 
 import DTO.Car;
 import DTO.Dealer;
+import DTO.Purchase;
 import Service.DealerReviewService;
 import Service.PurchaseService;
 import Service.PurchaseServiceImpl;
@@ -83,6 +84,7 @@ public class PurchaseController {
 						{
 							finalizePurchase(carNo, selectedDealer.getDealerNo(), selectedColor, sunRoof, coolSeat, aroundView, totalPrice);
 						}
+						
 						else
 						{ // 충전했는데도 잔액이 부족하다면 주문 취소
 							PurchaseView.displayInSufficientBalance();
@@ -99,7 +101,7 @@ public class PurchaseController {
 				else
 				{ // 잔고가 충분한 경우
 					finalizePurchase(carNo, selectedDealer.getDealerNo(), selectedColor, sunRoof, coolSeat, aroundView, totalPrice);
-					PurchaseView.displayPurchaseSuccess();
+					//PurchaseView.displayPurchaseSuccess();
 					MemberMenuView.menu();//구매가 끝나도 메인 화면으로
 				}
 			}
@@ -124,13 +126,32 @@ public class PurchaseController {
 	static void finalizePurchase(int carNo, int dealerNum, String color, int sunRoof, int coolSeat, int aroundView, int totalPrice) {
 		PurchaseService purchaseService = PurchaseServiceImpl.getInstance(); // 싱글톤 인스턴스 사용
         try
-		{
-            purchaseService.purchaseInsert(carNo, dealerNum, color, sunRoof, coolSeat, aroundView, totalPrice);
+        {
+        	purchaseService.purchaseInsert(carNo, dealerNum, color, sunRoof, coolSeat, aroundView, totalPrice);
         }
 		catch (SQLException e)
 		{
-            //sql exception 에러처리
+           e.printStackTrace();
         }
         PurchaseView.displayPurchaseSuccess();
 	}
+	
+	/**
+	 * 구매내역 조회
+	 */
+	public static void allPurchase() {
+		PurchaseService purchaseService = PurchaseServiceImpl.getInstance();
+		try {
+		Purchase purchase =	purchaseService.allPurchase();
+		PurchaseView.purchaseAll(purchase);
+		
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+
 }

@@ -7,19 +7,17 @@ public class Purchase {
 
 	private int purchaseNo;
 	private int memberNo;
-	private boolean sunRoof;
-	private boolean seat;
-	private boolean aroundView;
+	private int sunRoof;
+	private int seat;
+	private int aroundView;
 	private String color;
 	private String purchaseDate;
 	private int price;
 	private int dealerNo;
 	private String carNo;
 
-	public Purchase () {}
-	public Purchase(int purchaseNo, int memberNo, boolean sunRoof, boolean seat, boolean aroundView, String color,
+	public Purchase(int purchaseNo, int memberNo, int sunRoof, int seat, int aroundView, String color,
 			String purchaseDate, int price, int dealerNo, String carNo) {
-		super();
 		this.purchaseNo = purchaseNo;
 		this.memberNo = memberNo;
 		this.sunRoof = sunRoof;
@@ -31,107 +29,86 @@ public class Purchase {
 		this.dealerNo = dealerNo;
 		this.carNo = carNo;
 	}
-
 
 	public int getPurchaseNo() {
 		return purchaseNo;
 	}
 
+	public void setPurchaseNo(int purchaseNo) {
+		this.purchaseNo = purchaseNo;
+	}
 
 	public int getMemberNo() {
 		return memberNo;
 	}
 
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
 
-	public boolean isSunRoof() {
+	public int getSunRoof() {
 		return sunRoof;
 	}
 
+	public void setSunRoof(int sunRoof) {
+		this.sunRoof = sunRoof;
+	}
 
-	public boolean isSeat() {
+	public int getSeat() {
 		return seat;
 	}
 
+	public void setSeat(int seat) {
+		this.seat = seat;
+	}
 
-	public boolean isAroundView() {
+	public int getAroundView() {
 		return aroundView;
 	}
 
+	public void setAroundView(int aroundView) {
+		this.aroundView = aroundView;
+	}
 
 	public String getColor() {
 		return color;
 	}
 
+	public void setColor(String color) {
+		this.color = color;
+	}
 
 	public String getPurchaseDate() {
 		return purchaseDate;
 	}
 
+	public void setPurchaseDate(String purchaseDate) {
+		this.purchaseDate = purchaseDate;
+	}
 
 	public int getPrice() {
 		return price;
 	}
 
+	public void setPrice(int price) {
+		this.price = price;
+	}
 
 	public int getDealerNo() {
 		return dealerNo;
 	}
 
+	public void setDealerNo(int dealerNo) {
+		this.dealerNo = dealerNo;
+	}
 
 	public String getCarNo() {
 		return carNo;
 	}
 
-
-	public void setPurchaseNo(int purchaseNo) {
-		this.purchaseNo = purchaseNo;
-	}
-
-
-	public void setMemberNo(int memberNo) {
-		this.memberNo = memberNo;
-	}
-
-
-	public void setSunRoof(boolean sunRoof) {
-		this.sunRoof = sunRoof;
-	}
-
-
-	public void setSeat(boolean seat) {
-		this.seat = seat;
-	}
-
-
-	public void setAroundView(boolean aroundView) {
-		this.aroundView = aroundView;
-	}
-
-
-	public void setColor(String color) {
-		this.color = color;
-	}
-
-
-	public void setPurchaseDate(String purchaseDate) {
-		this.purchaseDate = purchaseDate;
-	}
-
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-
-	public void setDealerNo(int dealerNo) {
-		this.dealerNo = dealerNo;
-	}
-
-
 	public void setCarNo(String carNo) {
 		this.carNo = carNo;
 	}
-
 
 	@Override
 	public String toString() {
@@ -159,8 +136,5 @@ public class Purchase {
 		builder.append("]");
 		return builder.toString();
 	}
-	
 
-	
-	
 }

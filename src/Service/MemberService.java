@@ -37,7 +37,7 @@ public interface MemberService {
 	 * 충전하기
 	 * @throws SQLException 
 	 */
-	void balancePlusUpdate(String memberId,int amount1) throws SQLException;
+	void balancePlusUpdate(String memberId,int amount1) throws Exception;
 
 	/**
 	 * 인출하기 or 차량구매 시 잔액
