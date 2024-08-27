@@ -153,8 +153,8 @@ public class PurchaseDAOImpl implements PurchaseDAO
 
 	@Override//수정 필요!! 구매번호?
 	public int purchaseInsert(String carNo, int dealerNum, String color, int sunRoof, int coolSeat, int aroundView, int totalPrice) throws SQLException {
-		String query = "INSERT INTO Purchase (purchase_no,member_no,sunroof, seat, around_view, color, price, dealer_no,car_no) " +
-				"VALUES (purchase_no_seq.NEXTVAL,?, ?, ?, ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO Purchase (purchase_no,member_no,sunroof, seat, around_view, color, purchase_date, price, dealer_no,car_no) " +
+				"VALUES (purchase_no_seq.NEXTVAL,?, ?, ?, ?, ?,sysdate,?, ?, ?)";
 		int result;
 
 		Connection conn = null;
