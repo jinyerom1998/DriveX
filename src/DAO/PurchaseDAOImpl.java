@@ -152,11 +152,10 @@ public class PurchaseDAOImpl implements PurchaseDAO
 
 
 	@Override
-	public String getCarNoByCarName(String carName) throws SQLException
+	public int getCarNoByCarName(String carName) throws SQLException
 	{
-		String carNo = null;
 		String query = "SELECT car_no FROM Car WHERE car_name = ?";
-
+		int carNo=0;
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -170,7 +169,7 @@ public class PurchaseDAOImpl implements PurchaseDAO
 
 			if (rs.next())
 			{
-				carNo = rs.getString("car_no");
+				carNo = rs.getInt("car_no");
 			}
 		}
 		finally
@@ -192,11 +191,11 @@ public class PurchaseDAOImpl implements PurchaseDAO
 	}
 
 	@Override
-	public int purchaseInsert(String carNo, int dealerNum, String color, int sunRoof, int coolSeat, int aroundView, int totalPrice) throws SQLException {
+	public int purchaseInsert(int carNo, int dealerNum, String color, int sunRoof, int coolSeat, int aroundView, int totalPrice) throws SQLException {
 		String query = "INSERT INTO Purchase (purchase_no,member_no,sunroof, seat, around_view, color, purchase_date, price, dealer_no,car_no) " +
 				"VALUES (purchase_no_seq.NEXTVAL,?, ?, ?, ?, ?,sysdate,?, ?, ?)";
 		int result;
-
+		int carno;
 		Connection conn = null;
 		PreparedStatement ps = null;
 
@@ -215,7 +214,7 @@ public class PurchaseDAOImpl implements PurchaseDAO
 			ps.setString(5, color);
 			ps.setInt(6, totalPrice);
 			ps.setInt(7, dealerNum);
-			ps.setString(8, carNo);
+			ps.setInt(8, carNo);
 
 			result = ps.executeUpdate();
 		}
@@ -234,9 +233,10 @@ public class PurchaseDAOImpl implements PurchaseDAO
 	}
 
 	@Override
-	public int getBasePriceByCarNo(String carNo) throws SQLException
+	public int getBasePriceByCarNo(int carNo) throws SQLException
 	{
 		int basePrice = 0;
+
 		String query = "SELECT price FROM Car WHERE car_no = ?";
 
 		Connection conn = null;
@@ -247,7 +247,7 @@ public class PurchaseDAOImpl implements PurchaseDAO
 		{
 			conn = DBManager.getConnection();
 			ps = conn.prepareStatement(query);
-			ps.setString(1, carNo);
+			ps.setInt(1, carNo);
 			rs = ps.executeQuery();
 
 			if (rs.next())
@@ -363,7 +363,7 @@ public class PurchaseDAOImpl implements PurchaseDAO
 
 	//차량 구매하면 수량 감소
 	@Override
-	public int updateCarQuantity(String carNo, int amount) throws SQLException
+	public int updateCarQuantity(int carNo, int amount) throws SQLException
 	{
 		String query = "UPDATE Car SET quantity = quantity - ? WHERE car_no = ?";
 		Connection conn = null;
@@ -374,7 +374,7 @@ public class PurchaseDAOImpl implements PurchaseDAO
 			conn = DBManager.getConnection();
 			ps = conn.prepareStatement(query);
 			ps.setInt(1, amount);
-			ps.setString(2, carNo);
+			ps.setInt(2, carNo);
 			return ps.executeUpdate();
 		}
 		finally

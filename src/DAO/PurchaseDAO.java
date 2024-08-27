@@ -42,7 +42,7 @@ public interface PurchaseDAO {
 	 * @return 차량 번호
 	 * @throws SQLException 데이터베이스 접근 중 예외 발생 시
 	 */
-	String getCarNoByCarName(String carName) throws SQLException;
+	int getCarNoByCarName(String carName) throws SQLException;
 
 	/**
 	 * 순서) 4번. 색상 선택
@@ -85,7 +85,7 @@ public interface PurchaseDAO {
 	 * @return 삽입된 행의 수 (성공적으로 삽입된 경우 1 이상)
 	 * @throws SQLException 데이터베이스 접근 중 예외 발생 시
 	 */
-	int purchaseInsert(String carNo, int dealerNum, String color, int sunRoof, int coolSeat, int aroundView, int totalPrice) throws SQLException;
+	int purchaseInsert(int carNo, int dealerNum, String color, int sunRoof, int coolSeat, int aroundView, int totalPrice) throws SQLException;
 
 	/**
 	 * 순서) 7번.
@@ -98,7 +98,7 @@ public interface PurchaseDAO {
 	 * @return 차량 기본 가격
 	 * @throws SQLException 데이터베이스 접근 중 예외 발생 시
 	 */
-	int getBasePriceByCarNo(String carNo) throws SQLException;
+	int getBasePriceByCarNo(int carNo) throws SQLException;
 
 	/**
 	 *
@@ -111,7 +111,7 @@ public interface PurchaseDAO {
 	int updateMemberBalance(int memberNo, int amount) throws SQLException;
 
 	// 자동차 수량 감소
-	int updateCarQuantity(String carNo, int amount) throws SQLException;
+	int updateCarQuantity(int carNo, int amount) throws SQLException;
 
 	// 회원 잔고 조회
 	int getBalanceBySessionId(int memberNo) throws SQLException;

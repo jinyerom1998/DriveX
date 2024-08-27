@@ -50,7 +50,7 @@ public class PurchaseController {
 			String selectedCarName = PurchaseView.displayCarsAndSelect(carCategoryList);
 
 			// 3. 차량 번호 선택, 차량의 이름을 이용하여 carNo를 얻음
-			String carNo = purchaseService.getCarNoByCarName(selectedCarName);
+			int carNo = purchaseService.getCarNoByCarName(selectedCarName);
 
 			// 4. 색상 선택, 변수에 저장
 			String selectedColor = PurchaseView.chooseColor();
@@ -121,7 +121,7 @@ public class PurchaseController {
 	/**
 	 * 구매를 완료하는 메서드, 구매내역에 인서트 되는 경우
 	 */
-	static void finalizePurchase(String carNo, int dealerNum, String color, int sunRoof, int coolSeat, int aroundView, int totalPrice) {
+	static void finalizePurchase(int carNo, int dealerNum, String color, int sunRoof, int coolSeat, int aroundView, int totalPrice) {
 		PurchaseService purchaseService = PurchaseServiceImpl.getInstance(); // 싱글톤 인스턴스 사용
         try
 		{
