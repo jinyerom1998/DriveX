@@ -9,6 +9,7 @@ import DAO.MemberDAO;
 import DAO.MemberDAOImpl;
 import DAO.PurchaseDAO;
 import DAO.PurchaseDAOImpl;
+import DTO.Car;
 import DTO.Dealer;
 import DTO.MemberSession;
 
@@ -101,5 +102,12 @@ public class PurchaseServiceImpl implements PurchaseService {
 		int coolSeatPrice=coolSeat==1 ? purchaseDAO.getCoolSeatPrice() : 0;
 		int aroundViewPrice=aroundView==1 ? purchaseDAO.getAroundViewPrice() : 0;
 		return basePrice+sunRoofPrice+coolSeatPrice+aroundViewPrice;
+	}
+
+	//모든 종류의 차들을 가지고 옴
+	@Override
+	public List<Car> getCarList() throws SQLException
+	{
+		return purchaseDAO.getCarList();
 	}
 }

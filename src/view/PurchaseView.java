@@ -1,5 +1,6 @@
 package view;
 
+import DTO.Car;
 import DTO.Dealer;
 
 import java.util.List;
@@ -147,5 +148,16 @@ public class PurchaseView
         System.out.println("부족한 금액 : "+totalPrice);
         System.out.println("충전할 금액을 입력하시오 : ");
         return Integer.parseInt(scan.nextLine());
+    }
+
+    //모든 차량을 출력
+    public static void displayAllCars(List<Car> getAllcars)
+    {
+        for(Car car:getAllcars)
+        {
+            System.out.println("모든 차량 목록 출력");
+            System.out.printf("차량 이름 : %s || 마력 : %s || 연비 : %s || 재고량 : %d || 가격 : %d || 카테고리 : %s"
+            ,car.getCarName(),car.getHorsePower(),car.getFuel(),car.getQuantity(),car.getPrice(),car.getCategory());
+        }
     }
 }
