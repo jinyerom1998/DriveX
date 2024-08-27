@@ -48,7 +48,7 @@ public class PurchaseView
     // 3. 차량 색상 선택
     public static String chooseColor()
     {
-        System.out.println("색상을 선택하세요 : ");;;
+        System.out.println("색상을 선택하세요 : ");
         System.out.println("1. 베르비에 화이트");
         System.out.println("2. 레이싱 블루");
         System.out.println("3. 미드나잇 블랙");

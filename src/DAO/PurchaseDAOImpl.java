@@ -209,13 +209,13 @@ public class PurchaseDAOImpl implements PurchaseDAO
 			int sessionNum = MemberSession.getInstance().getMemberNo();
 
 			ps.setInt(1, sessionNum);
-			ps.setString(2, carNo);
-			ps.setInt(3, sunRoof);
-			ps.setInt(4, coolSeat);
-			ps.setInt(5, aroundView);
-			ps.setString(6, color);
-			ps.setInt(7, totalPrice);
-			ps.setInt(8, dealerNum);
+			ps.setInt(2, sunRoof);
+			ps.setInt(3, coolSeat);
+			ps.setInt(4, aroundView);
+			ps.setString(5, color);
+			ps.setInt(6, totalPrice);
+			ps.setInt(7, dealerNum);
+			ps.setString(8, carNo);
 
 			result = ps.executeUpdate();
 		}
