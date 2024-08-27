@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import DBManager.DBManager;
 import DTO.Member;
+import DTO.MemberSession;
 
 public class MemberDAOImpl implements MemberDAO {
 	
@@ -37,9 +38,7 @@ public class MemberDAOImpl implements MemberDAO {
 	    }
 
 	    return result;
-	}
-
-	
+	}	
 	
 	@Override
 	public Member login(String memberId, String password) throws SQLException {//
@@ -60,6 +59,18 @@ public class MemberDAOImpl implements MemberDAO {
 				member = new Member(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5),
 						rs.getString(6), rs.getInt(7));
 			}
+			
+			MemberSession ms = MemberSession.getInstance();
+            ms.setMemberNo(member.getMemberNo());
+            ms.setMemberId(member.getMemberId());
+            ms.setName(member.getName());
+            ms.setAge(member.getAge());
+            ms.setAddress(member.getAddress());
+            ms.setPassword(member.getPassword());
+            ms.setBalance(member.getBalance());
+			
+			
+			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

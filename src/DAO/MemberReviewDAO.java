@@ -18,7 +18,7 @@ public interface MemberReviewDAO
 	 * @param DealerStar = 딜러 별점
 	 * @return int => 성공여부
 	 */
-	int reviewInsert(int sessionNum, String title,String content,int carStar, int dealerStar);
+	int reviewInsert(String title,String content,int carStar, int dealerStar) throws Exception;
 	//각 평점이 int형인지 double형인지.
 	
 	/**
@@ -51,7 +51,10 @@ public interface MemberReviewDAO
 	 * 만약 review에 해당 구매번호가 없다면 review리턴
 	 * 있다면 이셉션 날려도됨.
 	 */
-	Review reviewDuplication(int sessionNum);
+	Review reviewDuplication()throws Exception;
+	
+	
+	public int purchaseNumFindByMemberSessionNum(int memberNo) throws Exception;
 	
 	
 	

@@ -18,8 +18,14 @@ public class DealerReviewDAOImpl implements DealerReviewDAO {
 	MemberSession memberSession = MemberSession.getInstance();
 	DealerSession dealerSession = DealerSession.getInstance();
 	
+<<<<<<< HEAD
+	MemberReviewDAO memberRiviewDAO = new MemberReviewDAOImpl();
+	
+	
+=======
 	MemberReviewDAO memberRiviewDAO = MemberReviewDAOImpl.getInstance();
 
+>>>>>>> 3d212ffee6449d9dd255f37f373e1cb6a1a9201e
 	@Override
 	public List<Review> selectReviewByNum() throws SQLException 
 	{
@@ -114,15 +120,18 @@ public class DealerReviewDAOImpl implements DealerReviewDAO {
 				ps.setInt(1, sessionNum);
 				rs = ps.executeQuery();
 				
-				if(rs.next()) 
-				{
-					purchaseNum = rs.getInt(1);
-				
+
+				if (rs.next()) {
+				purchaseNum = rs.getInt(1);
+
+				if (purchaseNum == 0) {
+					throw new SQLException();
+
+				} else {
 					return purchaseNum;
 
 			}
-			
-		
+				}
 		}
 		finally {
 			DBManager.dbClose(con, ps, rs);
@@ -131,42 +140,7 @@ public class DealerReviewDAOImpl implements DealerReviewDAO {
 		
 	}
 
-	@Override
-	public int purchaseNumFindByMemberSessionNum() throws Exception 
-	{	
-		
-		int memberSessionNum = memberSession.getMemberNo();
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		int purchaseNum = 0;
-		String sql = "SELECT PURCHASE_NO FROM PURCHASE WHERE MEMBER_NO = ?";
 
-		try {
-			
-				con = DBManager.getConnection();
-				ps = con.prepareStatement(sql);
-				ps.setInt(1, memberSessionNum);
-				rs = ps.executeQuery();
-				if (rs.next()) {
-				purchaseNum = rs.getInt(1);
-
-				if (purchaseNum == 0) {
-					throw new Exception();
-
-				} else {
-					return purchaseNum;
-				}
-
-			}
-			return 0;
-		}
-
-		finally {
-			DBManager.dbClose(con, ps, rs);
-		}
-
-	}
 
 	@Override
 	public int replyInsert(int reviewNo,String content) throws SQLException

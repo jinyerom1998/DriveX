@@ -1,7 +1,10 @@
 package view;
 
+import java.util.List;
 import java.util.Scanner;
 
+import DTO.MemberSession;
+import DTO.Reply;
 import DTO.Review;
 
 import controller.ReviewController;
@@ -10,11 +13,12 @@ public class ReviewView {
 	static Scanner sc = new Scanner(System.in);
 	
 	public static void menu() {
+		MemberSession session = MemberSession.getInstance();
+
 		while(true) {
-			
+						
 			System.out.println("userID와 잔액 출력하는 곳(세션)");
-			//SesseionSet ss = SessionSet.getInstance();
-			//System.out.println(ss.getSet());
+
 			
 			ReviewView.printMenu();
 			
@@ -22,10 +26,10 @@ public class ReviewView {
 			switch(menu) {
 			case 1 :
 				try{//구매를 했는지 검증먼저 한다
-					ReviewController.findBySessionNum(/*세션넘버*/);
+					ReviewController.findBySessionNum(session.getMemberNo());
 					
 					//구매를 했다면
-					ReviewView.register(/*세션넘버*/); // 등록한다.
+					ReviewView.register(session.getMemberNo()); // 등록한다.
 					
 				}catch (Exception e) {
 					//일치하는 구매내역이 없을 때 예외 발생. failView출력
@@ -51,6 +55,8 @@ public class ReviewView {
 		System.out.println("1. 등록   |   2. 조회   |  3. 삭제  |  4. 나가기");
 	}
 	
+	
+	
 	public static void register(int sessionNum) {
 		System.out.println("리뷰의 제목을 입력하세요");
 		String title = sc.nextLine();
@@ -62,7 +68,7 @@ public class ReviewView {
 		int dealerStar = Integer.parseInt(sc.nextLine());
 		
 		//컨트롤러의 register함수 호출
-		ReviewController.reviewInsert(sessionNum,title,content,carStar,dealerStar);
+		ReviewController.reviewInsert(title,content,carStar,dealerStar);
 	}
 	
 	public static void deleteReview() {
@@ -72,12 +78,6 @@ public class ReviewView {
 		ReviewController.reviewDelete(reNo);
 	}
 	
-	public static void reviewSelectAll(Review review) {
-		System.out.println(review);
-		
-		System.out.println("댓글 개수 : " + Review.getRepliesList().size() +"개 ---------");
-		for(Review reply : Review.getRepliesList()) {
-			System.out.println("       ▶ " + reply );
-		}
-	}
+	
+	
 }

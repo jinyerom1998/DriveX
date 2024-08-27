@@ -16,7 +16,7 @@ public interface MemberReviewService
 	 * @param DealerStar = 딜러 별점
 	 * @return int => 성공여부
 	 */
-	void reviewInsert(int sessionNum, String title,String content,int carStar, int dealerStar);
+	void reviewInsert(String title,String content,int carStar, int dealerStar) throws Exception;
 	//각 평점이 int형인지 double형인지.
 	
 	
@@ -42,5 +42,8 @@ public interface MemberReviewService
 	 * @return int => 성공여부
 	 */
 	void reviewDelete(int sessionNum);
+
+
+	int purchaseNumFindByMemberSessionNum(int sessionNum) throws Exception;
 	
 }

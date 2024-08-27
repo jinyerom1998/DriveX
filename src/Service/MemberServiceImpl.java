@@ -6,9 +6,6 @@ import DAO.MemberDAO;
 import DAO.MemberDAOImpl;
 import DTO.Member;
 
-import DAO.MemberDAO;
-import DAO.MemberDAOImpl;
-
 public class MemberServiceImpl implements MemberService {
 	MemberDAO memberDAO = new MemberDAOImpl();
 
@@ -56,6 +53,18 @@ public class MemberServiceImpl implements MemberService {
 		
 	
 	return member;
+	}
+
+	@Override
+	public void balancePlusUpdate(String memberId, int amount) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void balanceMinusUpdate(String memberId, int amount) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	/*@Override

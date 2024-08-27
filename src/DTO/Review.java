@@ -98,7 +98,7 @@ public class Review {
 		builder.append(dealerStar);
 		builder.append(", 등록일=");
 		builder.append(reviewDate);
-		builder.append("]");
+		builder.append("]\n");
 		return builder.toString();
 	}
 	

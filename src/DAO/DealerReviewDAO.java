@@ -39,7 +39,7 @@ public interface DealerReviewDAO
 	 */
 	int purchaseNumFindByDealerSessionNum(int sessionNum)throws Exception;
 	
-	public int purchaseNumFindByMemberSessionNum()throws Exception; 
+	public int purchaseNumFindByMemberSessionNum(int memberNo)throws Exception; 
 	
 	/**
 	 * replyDuplication()호출 후 리뷰를 리턴 받고,
@@ -54,6 +54,10 @@ public interface DealerReviewDAO
 	 * 만약 reply에 해당 구매번호가 없다면 reviewNum리턴.
 	 * 있다면 이셉션 날려도됨.  
 	 */
+<<<<<<< HEAD
+	int replyDuplication()throws Exception;
+=======
 	int replyDuplication(int sessionNum)throws Exception;
 	
+>>>>>>> 3d212ffee6449d9dd255f37f373e1cb6a1a9201e
 }
