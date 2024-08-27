@@ -296,7 +296,7 @@ public class PurchaseDAOImpl implements PurchaseDAO
 	private int getOptionPriceByName(String optionName) throws SQLException
 	{
 		int optionPrice = 0;
-		String query = "SELECT option_price FROM CarOption WHERE option_name = ?";
+		String query = "SELECT option_price FROM Car_Option WHERE option_name = ?";
 
 		Connection conn = null;
 		PreparedStatement ps = null;
