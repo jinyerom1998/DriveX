@@ -29,15 +29,20 @@ public interface MemberService {
 	 * @param memberId = 회원아이디
 	 * @return Member = 회원
 	 */
-	Member selectMemberById(String memberId);
+	Member selectMemberById(String memberId)throws SQLException;
 
 	/**
 	 * 충전하기
+	 * @throws SQLException 
 	 */
-	void balancePlusUpdate(String memberId, int amount);
+	void balancePlusUpdate(String memberId,int amount1) throws SQLException;
 
 	/**
 	 * 인출하기 or 차량구매 시 잔액
+	 * @return 
 	 */
-	void balanceMinusUpdate(String memberId, int amount);
+	
+	void balanceMinusUpdate(String memberId, int Amount2) throws SQLException;
+	
+	int balanceSelect() throws SQLException;
 }

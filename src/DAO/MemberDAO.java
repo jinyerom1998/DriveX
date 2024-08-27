@@ -32,19 +32,19 @@ public interface MemberDAO
 	
 	
 	/**
-	 * 충전하기 
-	 * 쿼리문으로 (balance = balance + amount)식으로 만들기
-	 * @throws  
+	 * 충전하기 쿼리문으로 (balance = balance + amount)식으로 만들기
 	 */
-	int balancePlusUpdate(String sessionId,int Amount) throws SQLException;
-	
+	int balancePlusUpdate(String memberId, int Amount) throws SQLException;
 	
 	/**
 	 * 인출하기 or 차량구매 시 잔액
 	 * 쿼리문으로 (balance = balance - amount)식으로 만들기
 	 */
 
-	int balanceMinusUpdate(String sessionId,int Amount) throws SQLException;
+	int balanceMinusUpdate(String memberId,int Amount2) throws SQLException;
 
+	int balanceSelect(String memberId) throws SQLException;
+
+	
 	
 }
