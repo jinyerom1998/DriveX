@@ -2,6 +2,8 @@ package Service;
 
 import java.sql.SQLException;
 import java.util.List;
+
+import DTO.Car;
 import DTO.Dealer;
 
 public interface PurchaseService {
@@ -21,6 +23,11 @@ public interface PurchaseService {
 	void purchaseInsert(String carNo,int dealerNum, String color, int sunRoof, int coolSeat, int aroundView, int totalPrice) throws SQLException;
 
 	// ---------------- 추가된 부분 ----------------
+
+	/*
+	전체 자동차들을 가지고 오는 함수
+	 */
+	public List<Car> getCarList()throws SQLException;
 
 	/**
 	 * 차량 리스트를 카테고리(SUV 또는 Sedan)에 따라 가져오는 함수
@@ -45,7 +52,7 @@ public interface PurchaseService {
 	 * @param aroundView 어라운드 뷰 옵션
 	 * @return 총 가격
 	 */
-	int calculateTotalPrice(String carNo, String color, int sunRoof, int coolSeat, int aroundView) throws SQLException;
+	int calculateTotalPrice(String carNo, int sunRoof, int coolSeat, int aroundView) throws SQLException;
 
 	/**
 	 * 잔액 확인 및 부족한 경우 처리하는 함수

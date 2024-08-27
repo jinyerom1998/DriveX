@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import DTO.Car;
 import DTO.Dealer;
 import DTO.MemberSession;
 import DBManager.DBManager;
@@ -110,6 +111,45 @@ public class PurchaseDAOImpl implements PurchaseDAO
 		}
 		return carList;
 	}
+
+	@Override
+	public List<Car> getCarList() throws SQLException {
+		List<Car> carList = new ArrayList<>();
+		String query = "SELECT car_name, drive, horse_power, quantity, price, category FROM Car";
+
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			conn = DBManager.getConnection();
+			ps = conn.prepareStatement(query);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Car car = new Car();
+				car.setCarName(rs.getString("car_name"));
+				car.setDrive(rs.getString("drive"));// 구동 방식
+				car.setHorsePower(rs.getString("horse_power"));// 마력
+				car.setQuantity(rs.getInt("quantity"));// 재고량
+				car.setPrice(rs.getInt("price"));// 가격
+				car.setCategory(rs.getString("category"));// 카테고리
+				carList.add(car);
+			}
+		} finally {
+			if (rs != null) {
+				rs.close();
+			}
+			if (ps != null) {
+				ps.close();
+			}
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		return carList;
+	}
+
 
 	@Override
 	public String getCarNoByCarName(String carName) throws SQLException

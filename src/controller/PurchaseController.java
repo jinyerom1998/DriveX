@@ -3,6 +3,7 @@ package controller;
 import java.sql.SQLException;
 import java.util.List;
 
+import DTO.Car;
 import DTO.Dealer;
 import Service.PurchaseService;
 import Service.PurchaseServiceImpl;
@@ -37,10 +38,15 @@ public class PurchaseController {
 			Dealer selectedDealer = PurchaseView.displayDealersAndSelect(dealers);
 
 			// 2. 차량 타입(카테고리) 및 모델 선택
+			//모든 타입의 차량 조회
+			List<Car> getAllcars=purchaseService.getCarList();
+			PurchaseView.displayAllCars(getAllcars);
+
+			//차량 카테고리를 선택
 			int carTypeChoice = PurchaseView.chooseCarType();
-			List<String> carList = (carTypeChoice == 1) ? purchaseService.getCarListByType("SUV") : purchaseService.getCarListByType("Sedan");
+			List<String> carCategoryList = (carTypeChoice == 1) ? purchaseService.getCarListByType("SUV") : purchaseService.getCarListByType("Sedan");
 			// 1을 고르면 suv 목록을 얻고 나머지 경우에서는 sedan의 정보를 얻음
-			String selectedCarName = PurchaseView.displayCarsAndSelect(carList);
+			String selectedCarName = PurchaseView.displayCarsAndSelect(carCategoryList);
 
 			// 3. 차량 번호 선택, 차량의 이름을 이용하여 carNo를 얻음
 			String carNo = purchaseService.getCarNoByCarName(selectedCarName);
@@ -54,7 +60,7 @@ public class PurchaseController {
 			int aroundView = PurchaseView.chooseAroundViewOption();
 
 			// 6. 총 비용 계산
-			int totalPrice = purchaseService.calculateTotalPrice(carNo, selectedColor, sunRoof, coolSeat, aroundView);
+			int totalPrice = purchaseService.calculateTotalPrice(carNo,sunRoof, coolSeat, aroundView);
 			PurchaseView.displayTotalPrice(totalPrice);
 
 			// 7. 구매 과정 처리
