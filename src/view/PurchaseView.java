@@ -16,7 +16,7 @@ public class PurchaseView
         {
             Dealer dealer = dealers.get(i);
             System.out.println((i+1)+dealer.getDealerName()+"-"+dealer.getSelf());
-            // 아직 딜러의 이름을 dto에서 설정하지 않은 상태
+            // 딜러번호와 딜러 자기소개 출력
         }
         int choice=Integer.parseInt(scan.nextLine());
         return dealers.get(choice-1);//자바에서는 0부터 인덱스가 시작하므로

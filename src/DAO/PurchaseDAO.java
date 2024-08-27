@@ -48,10 +48,6 @@ public interface PurchaseDAO {
 	 */
 
 	/**
-	 * 순서) 5번 1
-	 * 첫번째 옵션 띄워주고 1번) 구매 2번) 선택 안함
-	 * 그리고 두번째 ...
-	 *
 	 * 썬루프 옵션에 따른 가격을 가져옴
 	 * @return 썬루프 옵션 가격
 	 * @throws SQLException 데이터베이스 접근 중 예외 발생
@@ -59,7 +55,6 @@ public interface PurchaseDAO {
 	int getSunRoofPrice() throws SQLException;
 
 	/**
-	 * 순서) 5번 2
 	 * 냉각 시트 옵션에 따른 가격을 가져옴
 	 * @return 냉각 시트 옵션 가격
 	 * @throws SQLException 데이터베이스 접근 중 예외 발생
@@ -67,7 +62,6 @@ public interface PurchaseDAO {
 	int getCoolSeatPrice() throws SQLException;
 
 	/**
-	 * 순서) 5번 3
 	 * 어라운드뷰 옵션에 따른 가격을 가져옴
 	 * @return 어라운드뷰 옵션 가격
 	 * @throws SQLException 데이터베이스 접근 중 예외 발생 시
@@ -75,14 +69,6 @@ public interface PurchaseDAO {
 	int getAroundViewPrice() throws SQLException;
 
 	/**
-	 * 순서) 6번.
-	 * purchase 객체에다가 현재 임의로 나온 변수 값들을 순서대로 넣어줌
-	 * total 견적서를 띄워주고 구매 번호랑 회원 번호만 빼고 보여줌
-	 * 그 다음에 1) 구매하기 - 잔액이 다 있을 경우 순서 8번으로 바로 이동
-	 *                     - 잔액이 없을 경우 순서 7번으로 이동한 후 8번 순으로 진행
-	 * 2) 나가기
-	 * 여기서 견적서를 테이블에 입력
-	 *
 	 * 구매 정보를 데이터베이스에 삽입
 	 * 사용자 세션 ID
 	 * @param carNo 차량 번호
@@ -111,10 +97,10 @@ public interface PurchaseDAO {
 	int getBasePriceByCarNo(String carNo) throws SQLException;
 
 	/**
-	 * 순서) 8번.
+	 *
 	 * 구매 완료 시 호출되어야 할 DAO:
-	 *  MemberDAO.balanceMinusUpdate를 호출하는데 인수로 purchase.getTotalPrice 값을 주는 메소드 생성.
-	 *  DealerDAO.carQuantityMinusUpdate를 호출.
+	 *  MemberDAO.balanceMinusUpdate(PurchaseDAOImpl.updateMemberBalance)를 호출하는데 인수로 purchase.getTotalPrice 값을 주는 메소드 생성.
+	 *  DealerDAO.carQuantityMinusUpdate(PurchaseDAOImpl.updateCarQuantity)를 호출.
 	 */
 
 	// 회원 잔고 업데이트
