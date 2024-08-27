@@ -67,7 +67,7 @@ public class ReviewView {
 		int dealerStar = Integer.parseInt(sc.nextLine());
 		
 		//컨트롤러의 register함수 호출
-		ReviewController.reviewInsert(sessionNum,title,content,carStar,dealerStar);
+		ReviewController.reviewInsert(title,content,carStar,dealerStar);
 	}
 	
 	public static void deleteReview() {

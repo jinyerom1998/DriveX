@@ -9,15 +9,15 @@ import DTO.Review;
 
 public class MemberReviewServiceImpl implements MemberReviewService {
 	private static MemberReviewService instance = new MemberReviewServiceImpl();
-	private MemberReviewDAO memberReviewDao = MemberReviewDAOImpl.getInstance();
+	MemberReviewDAO memberReviewDAO = new MemberReviewDAOImpl();
 			
 	private MemberReviewServiceImpl() {}
     public static MemberReviewService getInstance() {
 		return instance;
 	}
 	@Override
-	public void reviewInsert(int sessionNum, String title, String content, int carStar, int dealerStar) {
-		int result = memberReviewDao.reviewInsert(sessionNum, title, content, carStar, dealerStar);
+	public void reviewInsert(String title, String content, int carStar, int dealerStar) throws Exception{
+		int result = memberReviewDAO.reviewInsert(title, content, carStar, dealerStar);
 
 		if(result==0) {
 			//Exception
@@ -27,7 +27,7 @@ public class MemberReviewServiceImpl implements MemberReviewService {
 
 	@Override
 	public List<Review> reviewSelectAll() {
-		List<Review> list = memberReviewDao.reviewSelectAll();
+		List<Review> list = memberReviewDAO.reviewSelectAll();
 		if(list.isEmpty()) {
 			//Exception
 		}
@@ -36,7 +36,7 @@ public class MemberReviewServiceImpl implements MemberReviewService {
 
 	@Override
 	public List<Reply> replySelectAll() {
-		List<Reply> list = memberReviewDao.replySelectAll();
+		List<Reply> list = memberReviewDAO.replySelectAll();
 		if(list.isEmpty()) {
 			//Exception
 		}
@@ -45,10 +45,21 @@ public class MemberReviewServiceImpl implements MemberReviewService {
 
 	@Override
 	public void reviewDelete(int sessionNum) {
-		int result = memberReviewDao.reviewDelete(sessionNum);
+		int result = memberReviewDAO.reviewDelete(sessionNum);
 		if(result==0) {
 			//Exception
 		}
 	}
+	@Override
+	public int purchaseNumFindByMemberSessionNum(int sessionNum) throws Exception{
+		int purchaseNo = memberReviewDAO.purchaseNumFindByMemberSessionNum(sessionNum);
+		
+		if(purchaseNo==0) {
+			//Exception
+		}
+		
+		return purchaseNo;
+	}
+	
 
 }

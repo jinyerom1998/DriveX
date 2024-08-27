@@ -111,12 +111,13 @@ public class DealerReviewDAOImpl implements DealerReviewDAO {
 		String sql = "SELECT PURCHASE_NO FROM PURCHASE WHERE DEALER_NO = ?";
 
 		try {
-			if (rs.next()) {
+			
 				con = DBManager.getConnection();
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, sessionNum);
 				rs = ps.executeQuery();
-
+				
+				if (rs.next()) {
 				purchaseNum = rs.getInt(1);
 
 				if (purchaseNum == 0) {
@@ -136,41 +137,7 @@ public class DealerReviewDAOImpl implements DealerReviewDAO {
 
 	}
 
-	@Override
-	public int purchaseNumFindByMemberSessionNum(int memberNo) throws Exception 
-	{
-		int memberSessionNum = memberSession.getMemberNo();
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		int purchaseNum = 0;
-		String sql = "SELECT PURCHASE_NO FROM PURCHASE WHERE MEMBER_NO = ?";
-
-		try {
-			if (rs.next()) {
-				con = DBManager.getConnection();
-				ps = con.prepareStatement(sql);
-				ps.setInt(1, memberSessionNum);
-				rs = ps.executeQuery();
-
-				purchaseNum = rs.getInt(1);
-
-				if (purchaseNum == 0) {
-					throw new Exception();
-
-				} else {
-					return purchaseNum;
-				}
-
-			}
-			return 0;
-		}
-
-		finally {
-			DBManager.dbClose(con, ps, rs);
-		}
-
-	}
+	
 
 	@Override
 	public int replyInsert(int reviewNo,String content) throws SQLException
