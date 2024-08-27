@@ -56,7 +56,7 @@ public class PurchaseController {
 			String selectedColor = PurchaseView.chooseColor();
 
 			// 5. 옵션 선택
-			int sunRoof = PurchaseView.chooseSunRoofOption();
+			int sunRoof = PurchaseView.chooseSunRoofOption(); // 옵션 선택하면 1을 반환
 			int coolSeat = PurchaseView.chooseSeatOption();
 			int aroundView = PurchaseView.chooseAroundViewOption();
 

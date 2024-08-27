@@ -75,7 +75,7 @@ public class PurchaseView
         System.out.println("2. 아니오");
 
         int choice=Integer.parseInt(scan.nextLine());
-        return (choice==1 ? 1:0); // 선택하면 1반환 선택하지 않으면 0반환
+        return (choice==1 ? 1:0); // 선택하면 1반환 선택하지 않으면 0반환(int형 1,0)
     }
 
     public static int chooseSeatOption()
