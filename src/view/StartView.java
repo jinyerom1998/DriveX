@@ -9,6 +9,7 @@ public class StartView {
 
 	}
 
+	
 }
 /*
  * Exception in thread "main" java.lang.Error: Unresolved compilation problems:

@@ -7,10 +7,11 @@ import java.sql.SQLException;
 
 import DBManager.DBManager;
 import DTO.Member;
+import DTO.MemberSession;
 
 
 public class MemberDAOImpl implements MemberDAO {
-	
+	MemberSession memberSession = MemberSession.getInstance();
 	@Override
 	public int memberInsert(String memberId, String name, int age, String address, String password) throws SQLException {
 	    Connection con = null;

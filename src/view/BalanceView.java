@@ -56,7 +56,14 @@ public class BalanceView {
 		int amount1 = Integer.parseInt(sc.nextLine());
 		System.out.println("인출할 아이디를 입력해 주세요 : ");
 		String memberId = sc.nextLine();
+		
+		int balance = BalanceController.balanceSelect(); //DB에서 현재 잔액 조회
+		System.out.println("현재금액 : "+ balance); //충전 전 금액
 		BalanceController.balanceMinusUpdate(memberId,amount1);
+		
+		balance = BalanceController.balanceSelect(); //DB에서 현재 잔액 조회->충전 된 금액
+		System.out.println("인출 후 금액 : "+ balance);
+		
 	}
 
 

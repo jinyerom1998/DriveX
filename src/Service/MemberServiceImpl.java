@@ -23,6 +23,24 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	/**
+	 * 로그인
+	 * 
+	 * @param memberId 아이디
+	 * @param password 패스워드
+	 * @throws SQLException
+	 */
+	@Override
+	public Member login(String memberId, String password) throws SQLException {
+		Member member = memberDAO.login(memberId, password);
+
+		if (member == null) {
+			throw new SQLException("로그인 실패: 아이디나 비밀번호가 잘못되었습니다.");
+		}
+
+		return member;
+	}
+
 
 	public Member selectMemberById(String memberId) throws SQLException {
 		Member member = memberDAO.selectMemberById(memberId);

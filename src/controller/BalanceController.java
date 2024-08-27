@@ -41,16 +41,4 @@ public class BalanceController {
 	 }
 	}
 
-/**
-	public static void balanceMinusUpdate(int amount2){
-		try {
-			memberService.balanceMinusUpdate(amount2);
-			System.out.println("인출이 완료되었습니다.");
-			System.out.println("현재 잔액 : " + amount2 );			
-		} catch (SQLException e) {
-			System.out.println("충전에 실패하였습니다.");
-			
-		}
-	}
-*/
 

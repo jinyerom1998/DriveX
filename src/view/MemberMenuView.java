@@ -28,7 +28,7 @@ public class MemberMenuView {
 				ReviewView.menu(); //후기게시판
 				break;
 			case 4 :
-				//PurchaseController.findBySessionNum(/*세션넘버*/);//컨트롤러.구매내역조회함수 호출
+				PurchaseController.startPurchase();//컨트롤러.구매내역조회함수 호출
 				break;
 			case 5 :
 				BalanceView.menu();
