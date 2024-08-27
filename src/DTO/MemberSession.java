@@ -10,7 +10,7 @@ public class MemberSession {
 	private String password;
 	private int balance;
 	
-	private MemberSession() {}
+	public MemberSession() {}
 	
 	private static MemberSession ms = new MemberSession();
 	

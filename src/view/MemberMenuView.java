@@ -11,9 +11,7 @@ public class MemberMenuView {
 	public static void menu() {
 		while(true) {
 			
-			System.out.println("userID와 잔액 출력하는 곳(세션)");
-			//SesseionSet ss = SessionSet.getInstance();
-			//System.out.println(ss.getSet());
+			System.out.println();
 			
 			MemberMenuView.printMenu();
 			
